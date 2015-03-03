@@ -1,0 +1,25 @@
+{{!< default}}
+
+{{#tag}}
+	<article id="tag-{{id}}" class="{{post_class}}" role="article">
+		{{#if image}}
+			<div class="tag-image">
+				<img src="{{image}}" alt="{{name}}" />
+			</div>
+		{{/if}}
+		<div class="tag-content">
+			<h1 class="tag-title">{{name}}</h1>
+			<p class="tag-meta">
+				<strong>Writings:</strong> {{plural ../pagination.total empty='No posts' singular='% post' plural='% posts'}}
+			</p>
+			{{#if description}}
+				<p>{{{description}}}</p>
+			{{else}}
+				<p>Posts tagged with <em>{{name}}</em></p>
+			{{/if}}
+			<hr />
+		</div>
+	</article>
+{{/tag}}
+
+{{> list-post}}
