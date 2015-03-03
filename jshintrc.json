@@ -1,0 +1,29 @@
+{
+	"bitwise": true,
+    "camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"es3": true,
+	"forin": true,
+	"immed": true,
+	"indent": 4,
+	"latedef": true,
+    "newcap": true,
+	"nobsp": true,
+	"quotmark": "single",
+	"undef": true,
+	"unused": true,
+	"strict": true,
+	"browser": true,
+	"devel": true,
+	"globals": {
+		"Modernizr": true,
+		"classie": true,
+		"Velocity": true,
+		"imagesLoaded": true,
+		"Hammer": true,
+		"hammertime": true,
+		"Snap": true,
+		"mina": true
+	}
+}
