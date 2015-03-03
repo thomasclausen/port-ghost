@@ -1,0 +1,10 @@
+<nav class="site-pagination" role="pagination">
+	<ul>
+		{{#if prev}}
+			<li class="prev"><a href="{{pageUrl prev}}">&larr; Older posts</a></li>
+		{{/if}}
+		{{#if next}}
+			<li class="next"><a href="{{pageUrl next}}">Newer posts &rarr;</a></li>
+		{{/if}}
+	</ul>
+</nav>
