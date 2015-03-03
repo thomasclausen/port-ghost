@@ -1,0 +1,533 @@
+/**
+ * Main CSS file for Port
+ */
+
+/* ==========================================================================
+	 Table of Content
+	 ========================================================================== */
+
+/**
+ * Table of Content
+
+	 0.  SASS
+	 1.  Typography
+	 2.  Header
+	 3.  Content Styles
+	 4.  Footer
+
+ */
+
+/* ==========================================================================
+	 0. SASS
+	 ========================================================================== */
+
+$primary-font-stack: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$primary-color: #25292c;
+$secondary-color: #4ac2be;
+
+$white: #fff;
+$grey-light: #efefef;
+$grey-medium: #878788;
+$grey-dark: #5e6564;
+$black: #000;
+
+@mixin border-radius($radius: 3px) {
+	border-radius: $radius;
+}
+
+/* ==========================================================================
+	 1. Typography
+	 ========================================================================== */
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+html {
+	font-size: 62.5%;
+	-webkit-tap-highlight-color: rgba($black, 0);
+}
+body {
+	font-family: $primary-font-stack;
+	font-size: 1.6rem;
+	line-height: 1.6em;
+	font-weight: 400;
+	color: $primary-color;
+	background-color: $white;
+	-webkit-font-smoothing: antialiased;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+h1,
+h2,
+h3,
+h4 {
+	font-weight: 700;
+	line-height: 1em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+h1 {
+	font-size: 2.4rem;
+
+	@media (min-width: 48em) {
+		font-size: 4rem;
+	}
+}
+h2 {
+	font-size: 2rem;
+}
+h3 {
+	font-size: 1.6rem;
+}
+h4 {
+	font-size: 1.4em;
+}
+p {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+a {
+	color: $secondary-color;
+	text-decoration: none;
+	position: relative;
+	transition: all 0.2s ease-in-out;
+
+	&:hover,
+	&:focus {
+		color: $primary-color;
+	}
+}
+img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	vertical-align: bottom;
+}
+blockquote {
+	color: $primary-color;
+	margin: 2em 0;
+	padding: 0.25em 0 0.25em 1.5em;
+	border-left: 0.5em solid rgba($secondary-color, 0.5);
+
+	@media (min-width: 40em) {
+		margin-left: -2em;
+	}
+
+	p {
+		margin: 1em 0;
+		font-style: italic;
+	}
+	cite {
+		font-weight: bold;
+	}
+}
+code {
+	font-family: Inconsolata, monospace, sans-serif;
+	font-size: 1.4rem;
+	line-height: 1em;
+	padding: 0.125em 0.25em;
+	background: rgba($secondary-color, 0.05);
+	border: 1px solid rgba($secondary-color, 0.2);
+	@include border-radius;
+	white-space: pre-wrap;
+}
+pre {
+	font-family: Inconsolata, monospace, sans-serif;
+	line-height: 1.25em;
+	padding: 0.5em;
+	background: rgba($secondary-color, 0.05);
+	border: 1px solid rgba($secondary-color, 0.2);
+	@include border-radius;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	overflow: auto;
+
+	code {
+		background: transparent;
+		border: none;
+		padding: 0;
+	}
+}
+hr {
+	height: 1px;
+	background: $grey-light;
+	border: none;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+mark {
+	color: $primary-color;
+	padding: 0.125em 0.25em;
+	@include border-radius;
+	white-space: pre-wrap;
+}
+del {
+	white-space: pre-wrap;
+}
+
+/* ==========================================================================
+	 2. Header
+	 ========================================================================== */
+
+.site-header {
+	padding: 2em 5% 4em 5%;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	.site-logo {
+		font-size: 2.8rem;
+		font-weight: 700;
+		line-height: 1.2;
+		text-transform: uppercase;
+
+		@media (min-width: 40em) {
+			float: left;
+			width: 50%;
+		}
+
+		a {
+			color: $primary-color;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+
+			&:hover {
+				color: $secondary-color;
+				text-decoration: none;
+			}
+		}
+	}
+	.site-navigation {
+		clear: both;
+		margin-top: 5px;
+
+		@media (min-width: 40em) {
+			width: 50%;
+			text-align: right;
+			float: right;
+			clear: none;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0;
+			margin-top: 0;
+			margin-bottom: 0;
+
+			li {
+				margin-left: 18px;
+				display: inline-block;
+
+				&:first-child {
+					margin-left: 0;
+				}
+				&.current a {
+					color: $grey-medium;
+				}
+			}
+		}
+		a {
+			font-size: 1.2rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			color: $primary-color;
+			text-decoration: none;
+			text-transform: uppercase;
+
+			&:hover {
+				color: $secondary-color;
+			}
+		}
+	}
+}
+
+/* ==========================================================================
+	 3. Content Styles
+	 ========================================================================== */
+
+.wrap {
+	min-width: 20em;
+	width: 100%;
+	max-width: 80em;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.site-content {
+	padding-right: 5%;
+	padding-left: 5%;
+}
+
+.post {
+	max-width: 960px;
+	margin-right: auto;
+	margin-left: auto;
+
+	@media (min-width: 48em) {
+		text-align: center;
+	}
+
+	&.page {
+		text-align: left;
+	}
+
+	.post-image {
+
+		img {
+			width: 100%;
+		}
+	}
+	.author-image,
+	.tag-image {
+		width: 15em;
+		height: 14em;
+		margin: 0 auto 2em auto;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			@include border-radius(50%);
+		}
+	}
+	.error-image {
+		width: 15em;
+		height: 14em;
+		margin: 0 auto 2em auto;
+		overflow: hidden;
+
+		span {
+			width: 3em;
+			height: 3em;
+			font-size: 8rem;
+			line-height: 3em;
+			font-weight: 700;
+			color: $white;
+			text-align: center;
+			background: $primary-color;
+			@include border-radius(50%);
+			display: inline-block;
+		}
+	}
+	.post-content,
+	.author-content,
+	.tag-content {
+
+		h1,
+		p,
+		hr {
+			max-width: 760px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+		h1 {
+			padding-right: 1em;
+			padding-left: 1em;
+		}
+		p {
+			padding-right: 1.5em;
+			padding-left: 1.5em;
+
+			strong {
+				margin-left: 1em;
+
+				&:first-child {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+	.page-content,
+	.error-content {
+		max-width: 760px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.portfolio-images {
+
+		img {
+			width: 100%;
+			margin-top: 0.25em;
+			margin-bottom: 0.25em;
+		}
+	}
+}
+
+.post-list {
+	margin-right: -1em;
+	margin-left: -1em;
+	clear: both;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	.post {
+		padding: 1em;
+
+		@media (min-width: 30em) {
+			width: 50%;
+			float: left;
+		}
+		@media (min-width: 60em) {
+			width: 33.33333333%;
+		}
+
+		a {
+
+			&:hover {
+
+				.post-image {
+
+					img {
+						filter: grayscale(100%);
+						transform: scale(1.05);
+					}
+					.overlay {
+						opacity: 1;
+						z-index: 1;
+						transition: opacity 0.25s ease-in-out, z-index 0s ease-in-out;
+					}
+				}
+			}
+		}
+		.post-image {
+			position: relative;
+			overflow: hidden;
+
+			img {
+				transition: transform 0.25s ease-in-out, filter 0.25s ease-in-out;
+			}
+			.overlay {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				padding-right: 1em;
+				padding-left: 1em;
+				background: rgba($black, 0.5);
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: -1;
+				transition: opacity 0.25s ease-in-out, z-index 0.25s ease-in-out;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.post-title {
+					padding: 0.5em 1em;
+					background: $white;
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
+
+.site-pagination {
+	margin-top: 2em;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+
+		li {
+			width: 50%;
+
+			&.prev {
+				float: left;
+			}
+			&.next {
+				text-align: right;
+				float: right;
+			}
+		}
+	}
+	a {
+		font-weight: 700;
+		color: $primary-color;
+		text-decoration: none;
+
+		&:hover {
+			color: $secondary-color;
+		}
+	}
+}
+
+/* ==========================================================================
+	 4. Footer
+	 ========================================================================== */
+
+.site-footer {
+	font-size: 1.2rem;
+	font-weight: 700;
+	padding-right: 5%;
+	padding-left: 5%;
+	margin-top: 5rem;
+	position: relative;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	a {
+		color: $grey-medium;
+
+		&:hover {
+			color: $primary-color;
+		}
+	}
+	.copyright {
+		padding-top: 2rem;
+		border-top: 1px solid $grey-light;
+
+		@media (min-width: 40em) {
+			width: 50%;
+			padding-bottom: 2rem;
+			float: left;
+		}
+	}
+	.credit {
+		padding-bottom: 2rem;
+
+		@media (min-width: 40em) {
+			width: 50%;
+			text-align: right;
+			padding-top: 2rem;
+			border-top: 1px solid $grey-light;
+			float: right;
+		}
+	}
+}
