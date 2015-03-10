@@ -481,6 +481,49 @@ del {
 	}
 }
 
+.post-pagination {
+	padding-top: 3em;
+	border-top: 1px solid $grey-light;
+	margin-top: 2em;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+
+		li {
+			width: 50%;
+
+			&.next {
+				float: left;
+			}
+			&.prev {
+				text-align: right;
+				float: right;
+			}
+		}
+	}
+	a {
+		font-weight: 700;
+		color: $primary-color;
+		text-decoration: none;
+
+		&:hover {
+			color: $secondary-color;
+		}
+	}
+}
+
 /* ==========================================================================
 	 4. Footer
 	 ========================================================================== */
@@ -490,7 +533,7 @@ del {
 	font-weight: 700;
 	padding-right: 5%;
 	padding-left: 5%;
-	margin-top: 5rem;
+	margin-top: 4.8rem;
 	position: relative;
 
 	&:before,
