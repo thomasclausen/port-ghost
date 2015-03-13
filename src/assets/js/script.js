@@ -47,10 +47,10 @@
 				}
 
 				if (rssItems[nextItemNo] !== undefined) {
-					nextLink.innerHTML = '<a href="' + rssItems[nextItemNo].getElementsByTagName('link')[0].textContent.replace(window.location.origin, '') + '" title="' + rssItems[nextItemNo].getElementsByTagName('title')[0].textContent + '" rel="next">&larr; ' + rssItems[nextItemNo].getElementsByTagName('title')[0].textContent + '</a>';
+					nextLink.innerHTML = '<a href="' + rssItems[nextItemNo].getElementsByTagName('link')[0].textContent.replace(window.location.origin, '') + '" title="' + rssItems[nextItemNo].getElementsByTagName('title')[0].textContent + '" rel="next"><span>Next post:</span><br />&larr; ' + rssItems[nextItemNo].getElementsByTagName('title')[0].textContent + '</a>';
 				}
 				if (rssItems[previousItemNo] !== undefined) {
-					previousLink.innerHTML = '<a href="' + rssItems[previousItemNo].getElementsByTagName('link')[0].textContent.replace(window.location.origin, '') + '" title="' + rssItems[previousItemNo].getElementsByTagName('title')[0].textContent + '" rel="prev">' + rssItems[previousItemNo].getElementsByTagName('title')[0].textContent + ' &rarr;</a>';
+					previousLink.innerHTML = '<a href="' + rssItems[previousItemNo].getElementsByTagName('link')[0].textContent.replace(window.location.origin, '') + '" title="' + rssItems[previousItemNo].getElementsByTagName('title')[0].textContent + '" rel="prev"><span>Previous post:</span><br />' + rssItems[previousItemNo].getElementsByTagName('title')[0].textContent + ' &rarr;</a>';
 				}
 			}
 			if (requestXML.status >= 400) {
