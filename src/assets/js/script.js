@@ -15,7 +15,7 @@
 	}
 
 	function init() {
-		if (classie.hasClass(body, 'post-template')) {
+		if (classie.hasClass(body, 'post-template') && !classie.hasClass(body, 'page-template')) {
 			fetchPrevNextLinks();
 		}
 	}
