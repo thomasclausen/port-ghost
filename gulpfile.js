@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     csslint = require('gulp-csslint'),
     cssmin = require('gulp-minify-css'),
+    uncss = require('gulp-uncss'),
     jshint = require('gulp-jshint'),
     jsmin = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
@@ -52,12 +53,34 @@ gulp.task('styles', function() {
     .pipe(sass({ style: 'compressed' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(concat(pkg.name + '.css'))
+    .pipe(gulp.dest(pkg.name + '/assets/css'))
+    .pipe(cssmin({keepSpecialComments: 0}))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(pkg.name + '/assets/css'));
+});
+gulp.task('styles-uncss', function() {
+  return gulp.src(paths.styles)
+    .pipe(sass({ style: 'compressed' }))
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(concat(pkg.name + '.css'))
+    .pipe(uncss({
+      html: [
+        'http://localhost:2368/', // HOME
+        'http://localhost:2368/about/', // PAGE
+        'http://localhost:2368/welcome-to-ghost/', // POST
+        'http://localhost:2368/tag/getting-started/', // TAG
+        'http://localhost:2368/author/thomas-clausen/', // AUTHOR
+        'http://localhost:2368/404/' // ERROR
+      ]
+    }))
+    .pipe(rename({suffix: '.uncss'}))
+    .pipe(gulp.dest(pkg.name + '/assets/css'))
     .pipe(cssmin({keepSpecialComments: 0}))
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(pkg.name + '/assets/css'));
 });
 gulp.task('styles-test', ['styles'], function() {
-  return gulp.src(pkg.name + '/assets/css/style.css')
+  return gulp.src(pkg.name + '/assets/css/' + pkg.name + '.css')
     .pipe(csslint('csslintrc.json'))
     .pipe(csslint.reporter());
 });
