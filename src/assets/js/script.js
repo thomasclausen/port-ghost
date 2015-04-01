@@ -32,7 +32,7 @@
 		var requestXML = new XMLHttpRequest();
 		requestXML.open('GET', '/rss', false);
 		requestXML.onreadystatechange = function () {
-			if (requestXML.status === 200 && requestXML.readyState === 4 && requestXML.responseXML != null) {
+			if (requestXML.status === 200 && requestXML.readyState === 4 && requestXML.responseXML !== null) {
 				var rssItems = requestXML.responseXML.getElementsByTagName('item'),
 					nextItemNo = 0,
 					nextLink = document.querySelector('.post-pagination .next'),
@@ -56,7 +56,7 @@
 			if (requestXML.status >= 400) {
 				poorMansDebugging('Couldn\'t retrieve links from RSS Feed.');
 			}
-		}
+		};
 		requestXML.onerror = function () {
 			poorMansDebugging('Couldn\'t retrieve links from RSS Feed.');
 		};
