@@ -42,6 +42,14 @@ var paths = {
     partials_custom: 'src/partials/custom/*.hbs'
   }
 };
+var pages = [
+  'http://localhost:2368/', // HOME
+  'http://localhost:2368/about/', // PAGE
+  'http://localhost:2368/welcome-to-ghost/', // POST
+  'http://localhost:2368/tag/getting-started/', // TAG
+  'http://localhost:2368/author/thomas-clausen/', // AUTHOR
+  'http://localhost:2368/404/' // ERROR
+];
 
 gulp.task('clean', function() {
   return gulp.src(pkg.name, {read: false})
@@ -64,14 +72,7 @@ gulp.task('styles-uncss', function() {
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(concat(pkg.name + '.css'))
     .pipe(uncss({
-      html: [
-        'http://localhost:2368/', // HOME
-        'http://localhost:2368/about/', // PAGE
-        'http://localhost:2368/welcome-to-ghost/', // POST
-        'http://localhost:2368/tag/getting-started/', // TAG
-        'http://localhost:2368/author/thomas-clausen/', // AUTHOR
-        'http://localhost:2368/404/' // ERROR
-      ]
+      html: pages
     }))
     .pipe(rename({suffix: '.uncss'}))
     .pipe(gulp.dest(pkg.name + '/assets/css'))
