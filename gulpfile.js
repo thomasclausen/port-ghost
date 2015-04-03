@@ -15,6 +15,8 @@ var gulp = require('gulp'),
     zip = require('gulp-zip'),
     ftp = require('gulp-ftp'),
     psi = require('psi'),
+    Pageres = require('pageres'),
+    imagediff = require('gulp-image-diff'),
     pkg = require('./package.json'),
     ftplogin = require('./ftplogin.json');
 
@@ -229,4 +231,70 @@ gulp.task('psi-desktop', function (cb) {
     locale: 'en_US',
     threshold: 80
   }, cb);
+});
+
+gulp.task('screenshots', function () {
+  var viewports = ['320x480', '768x1024', '1024x768', '1280x1024'];
+  var screenshots = new Pageres({
+    delay: 3
+  })
+  .src('http://localhost:2368/', viewports, {
+    filename: pkg.name + '-home-<%= size %>'
+  })
+  .src('http://localhost:2368/about/', viewports, {
+    filename: pkg.name + '-page-<%= size %>'
+  })
+  .src('http://localhost:2368/welcome-to-ghost/', viewports, {
+    filename: pkg.name + '-post-<%= size %>'
+  })
+  .src('http://localhost:2368/tag/getting-started/', viewports, {
+    filename: pkg.name + '-tag-<%= size %>'
+  })
+  .src('http://localhost:2368/author/thomas-clausen/', viewports, {
+    filename: pkg.name + '-author-<%= size %>'
+  })
+  .src('http://localhost:2368/404/', viewports, {
+    filename: pkg.name + '-404-<%= size %>'
+  })
+  .dest('test/screenshots/reference/');
+
+  screenshots.run(function (err) {
+    if (err) {
+      throw err;
+    }
+
+    console.log('done');
+  });
+});
+gulp.task('compare', function() {
+  gulp.src(['test/screenshots/original/' + pkg.name + '-home-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-home-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-home-320x480.png'
+    }));
+  gulp.src(['test/screenshots/original/' + pkg.name + '-page-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-page-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-page-320x480.png'
+    }));
+  gulp.src(['test/screenshots/original/' + pkg.name + '-post-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-post-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-post-320x480.png'
+    }));
+  gulp.src(['test/screenshots/original/' + pkg.name + '-tag-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-tag-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-tag-320x480.png'
+    }));
+  gulp.src(['test/screenshots/original/' + pkg.name + '-author-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-author-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-author-320x480.png'
+    }));
+  gulp.src(['test/screenshots/original/' + pkg.name + '-404-320x480.png'])
+    .pipe(imagediff({
+      referenceImage: 'test/screenshots/reference/' + pkg.name + '-404-320x480.png',
+      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-404-320x480.png'
+    }));
 });
