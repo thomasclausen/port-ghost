@@ -43,6 +43,30 @@ var paths = {
     partials_custom: 'src/partials/custom/*.hbs'
   }
 };
+var test_suite = {
+  urls: [
+    'http://localhost:2368/', // HOME
+    'http://localhost:2368/about/', // PAGE
+    'http://localhost:2368/welcome-to-ghost/', // POST
+    'http://localhost:2368/tag/getting-started/', // TAG
+    'http://localhost:2368/author/thomas-clausen/', // AUTHOR
+    'http://localhost:2368/404/' // ERROR
+  ],
+  filenames: [
+    pkg.name + '-home-<%= size %>',
+    pkg.name + '-page-<%= size %>',
+    pkg.name + '-post-<%= size %>',
+    pkg.name + '-tag-<%= size %>',
+    pkg.name + '-author-<%= size %>',
+    pkg.name + '-error-<%= size %>'
+  ],
+  viewports: [
+    '320x480', // MOBILE
+    '768x1024', // TABLET - VERTICAL
+    '1024x768', // TABLET - HORIZONTAL
+    '1280x1024' // DESKTOP
+  ]
+};
 
 gulp.task('clean', function() {
   return gulp.src(pkg.name, {read: false})
@@ -234,67 +258,35 @@ gulp.task('psi-desktop', function (cb) {
 });
 
 gulp.task('screenshots', function () {
-  var viewports = ['320x480', '768x1024', '1024x768', '1280x1024'];
-  var screenshots = new Pageres({
-    delay: 3
-  })
-  .src('http://localhost:2368/', viewports, {
-    filename: pkg.name + '-home-<%= size %>'
-  })
-  .src('http://localhost:2368/about/', viewports, {
-    filename: pkg.name + '-page-<%= size %>'
-  })
-  .src('http://localhost:2368/welcome-to-ghost/', viewports, {
-    filename: pkg.name + '-post-<%= size %>'
-  })
-  .src('http://localhost:2368/tag/getting-started/', viewports, {
-    filename: pkg.name + '-tag-<%= size %>'
-  })
-  .src('http://localhost:2368/author/thomas-clausen/', viewports, {
-    filename: pkg.name + '-author-<%= size %>'
-  })
-  .src('http://localhost:2368/404/', viewports, {
-    filename: pkg.name + '-404-<%= size %>'
-  })
-  .dest('test/screenshots/reference/');
-
-  screenshots.run(function (err) {
-    if (err) {
-      throw err;
-    }
-
-    console.log('done');
-  });
+  for(var i = 0; i < test_suite.urls.length; i++) {
+    new Pageres({
+      delay: 3
+    })
+      .src(test_suite.urls[i], test_suite.viewports, {
+        filename: test_suite.filenames[i]
+      })
+      .dest('test/screenshots/reference/')
+      .run(function (err) {
+        if (err) {
+          throw err;
+        }
+      });
+  }
 });
 gulp.task('compare', function() {
-  gulp.src(['test/screenshots/original/' + pkg.name + '-home-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-home-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-home-320x480.png'
-    }));
-  gulp.src(['test/screenshots/original/' + pkg.name + '-page-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-page-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-page-320x480.png'
-    }));
-  gulp.src(['test/screenshots/original/' + pkg.name + '-post-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-post-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-post-320x480.png'
-    }));
-  gulp.src(['test/screenshots/original/' + pkg.name + '-tag-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-tag-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-tag-320x480.png'
-    }));
-  gulp.src(['test/screenshots/original/' + pkg.name + '-author-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-author-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-author-320x480.png'
-    }));
-  gulp.src(['test/screenshots/original/' + pkg.name + '-404-320x480.png'])
-    .pipe(imagediff({
-      referenceImage: 'test/screenshots/reference/' + pkg.name + '-404-320x480.png',
-      differenceMapImage: 'test/screenshots/difference/' + pkg.name + '-404-320x480.png'
-    }));
+  for(var a = 0; a < test_suite.filenames.length; a++) {
+    console.log(test_suite.filenames[a].replace('-<%= size %>', ''));
+    var b = 0;
+    while (b < 4) {
+      console.log(test_suite.filenames[a].replace('<%= size %>', test_suite.viewports[b]));
+
+      gulp.src(['test/screenshots/original/' + test_suite.filenames[a].replace('<%= size %>', test_suite.viewports[b]) + '.png'])
+        .pipe(imagediff({
+          referenceImage: 'test/screenshots/reference/' + test_suite.filenames[a].replace('<%= size %>', test_suite.viewports[b]) + '.png',
+          differenceMapImage: 'test/screenshots/difference/' + test_suite.filenames[a].replace('<%= size %>', test_suite.viewports[b]) + '.png'
+        }));
+
+      b++;
+    }
+  }
 });
