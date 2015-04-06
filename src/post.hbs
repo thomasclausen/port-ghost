@@ -12,7 +12,11 @@
 
 <nav class="post-pagination" role="navigation">
 	<ul>
-		<li class="next"></li>
-		<li class="prev"></li>
+		{{#next_post}}
+			<li class="next"><a href="{{url}}" title="{{title}}" rel="next"><span>Next post:</span><br />&larr; {{title}}</a></li>
+		{{/next_post}}
+		{{#prev_post}}
+			<li class="prev"><a href="{{url}}" title="{{title}}" rel="prev"><span>Previous post:</span><br />{{title}} &rarr;</a></li>
+		{{/prev_post}}
 	</ul>
 </nav>
