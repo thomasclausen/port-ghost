@@ -15,11 +15,26 @@
 		}
 	}
 
+	function getPageSpeed() {
+        var loadTime = new Date().getTime() - window.performance.timing.navigationStart,
+			connectionSpeed = 'fast';
+
+		if (loadTime > 1000) {
+			connectionSpeed = 'medium';
+			if (loadTime > 3000) {
+				connectionSpeed = 'slow';
+			}
+		}
+		poorMansDebugging(connectionSpeed + ' - ' + loadTime + ' ms');
+    }
+
 	function init() {
 		if (classie.hasClass(body, 'post-template') && !classie.hasClass(body, 'page-template')) {
 			fetchPrevNextLinks();
 		}
 	}
+
+	window.addEventListener('load', getPageSpeed);
 
 	documentState = setInterval(function () {
 		poorMansDebugging('documentState: ' + document.readyState);
