@@ -4,6 +4,12 @@
 
 It's build for the [Ghost blogging platform](http://tryghost.org), which enables you to keep your portfolio up-to-date with ease.
 
+## Feedback
+
+Found a bug? Please [create an issue](https://github.com/thomasclausen/port-ghost/issues) on GitHub, and I'll do my best to fix it.
+
+Also feel free to [create an issue](https://github.com/thomasclausen/port-ghost/issues) if you have a great idea for an improvement or think there's a feature missing.
+
 ## Copyright & License
 
 Copyright (C) 2015 Thomas Clausen - Released under the MIT License.
