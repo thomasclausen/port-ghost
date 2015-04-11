@@ -1,6 +1,8 @@
 # PORT
 
+**Port** is a simple theme with a single purpose - to bring your portfolio in focus and enable you to showcase your awesomeness.
 
+It's build for the [Ghost blogging platform](http://tryghost.org), which enables you to keep your portfolio up-to-date with ease.
 
 ## Copyright & License
 
