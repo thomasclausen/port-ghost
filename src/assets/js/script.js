@@ -16,7 +16,7 @@
 	}
 
 	function getPageSpeed() {
-        var loadTime = new Date().getTime() - window.performance.timing.navigationStart,
+		var loadTime = new Date().getTime() - window.performance.timing.navigationStart,
 			connectionSpeed = 'fast';
 
 		if (loadTime > 1000) {
@@ -26,7 +26,7 @@
 			}
 		}
 		poorMansDebugging(connectionSpeed + ' - ' + loadTime + ' ms');
-    }
+	}
 
 	function init() {
 		if (classie.hasClass(body, 'post-template') && !classie.hasClass(body, 'page-template')) {
