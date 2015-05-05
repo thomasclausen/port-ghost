@@ -1,0 +1,201 @@
+{{!< default}}
+
+{{#post}}
+	<article id="page-{{id}}" class="{{post_class}}" role="article">
+		<div class="page-content">
+			<h1 class="page-title">{{title}}</h2>
+			{{content}}
+		</div>
+	</article>
+{{/post}}
+
+<button id="authorize-button" style="visibility: hidden">Authorize</button>
+<button id="run-demo-button" style="visibility: hidden">Run Demo</button>
+<hr />
+<div id="output">Loading, one sec....</div>
+
+<aside class="latest-posts">
+	<h4>Top 5 posts - Our top posts right now</h4>
+</aside>
+
+<script type="text/javascript">
+// https://github.com/google/google-api-javascript-client/tree/master/samples/analytics/v3
+// https://developers.google.com/analytics/solutions/articles/hello-analytics-api#query_sessions
+// https://developers.google.com/analytics/devguides/reporting/embed/v1/custom-components
+// https://ga-dev-tools.appspot.com/embed-api/custom-components/
+
+var API_KEY = 'AIzaSyCuFXPmkn3OKbeQ9D6htI0ZLSa2gVREW-Y',
+	CLIENT_ID = '620930885968-mmos0i02ulli7n4dbr04m0av89833eua.apps.googleusercontent.com',
+	SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
+
+function poorMansDebugging(string) {
+	if (window.console) {
+		console.log(string);
+	}
+}
+
+function handleClientLoad() {
+	poorMansDebugging('loaded');
+	gapi.client.setApiKey(API_KEY);
+	window.setTimeout(checkAuth, 1);
+}
+
+function checkAuth() {
+	gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: true}, handleAuthResult);
+}
+
+function handleAuthResult(authResult) {
+	if (authResult) {
+		loadAnalyticsClient();
+	} else {
+		handleUnauthorized();
+	}
+}
+
+function handleAuthorized() {
+	var authorizeButton = document.getElementById('authorize-button'),
+		runDemoButton = document.getElementById('run-demo-button');
+
+	authorizeButton.style.visibility = 'hidden';
+	runDemoButton.style.visibility = '';
+	runDemoButton.onclick = makeApiCall;
+	poorMansDebugging('Click the Run Demo button to begin.');
+}
+
+function handleUnauthorized() {
+	var authorizeButton = document.getElementById('authorize-button'),
+		runDemoButton = document.getElementById('run-demo-button');
+
+	runDemoButton.style.visibility = 'hidden';
+	authorizeButton.style.visibility = '';
+	authorizeButton.onclick = handleAuthClick;
+	poorMansDebugging('Please authorize this script to access Google Analytics.');
+}
+
+function handleAuthClick(event) {
+	gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: false}, handleAuthResult);
+	return false;
+}
+
+function loadAnalyticsClient() {
+	gapi.client.load('analytics', 'v3', handleAuthorized);
+}
+
+function makeApiCall() {
+	poorMansDebugging('Querying Accounts.');
+	gapi.client.analytics.management.accounts.list().execute(handleAccounts);
+}
+
+function handleAccounts(response) {
+	if (!response.code) {
+		if (response && response.items && response.items.length) {
+			var firstAccountId = response.items[0].id;
+			queryWebproperties(firstAccountId);
+		} else {
+			poorMansDebugging('No accounts found for this user.');
+		}
+	} else {
+		poorMansDebugging('There was an error querying accounts: ' + response.message);
+	}
+}
+
+function queryWebproperties(accountId) {
+	poorMansDebugging('Querying Webproperties.');
+	gapi.client.analytics.management.webproperties.list({'accountId': accountId}).execute(handleWebproperties);
+}
+
+function handleWebproperties(response) {
+	if (!response.code) {
+		if (response && response.items && response.items.length) {
+			console.log(response.items);
+			var firstAccountId = response.items[2].accountId;
+			var firstWebpropertyId = response.items[2].id;
+			queryProfiles(firstAccountId, firstWebpropertyId);
+		} else {
+			poorMansDebugging('No webproperties found for this user.');
+		}
+	} else {
+		poorMansDebugging('There was an error querying webproperties: ' + response.message);
+	}
+}
+
+function queryProfiles(accountId, webpropertyId) {
+	poorMansDebugging('Querying Profiles.');
+	gapi.client.analytics.management.profiles.list({'accountId': accountId, 'webPropertyId': webpropertyId}).execute(handleProfiles);
+}
+
+function handleProfiles(response) {
+	if (!response.code) {
+		if (response && response.items && response.items.length) {
+			console.log(response.items);
+			var firstProfileId = response.items[0].id;
+			queryCoreReportingApi(firstProfileId);
+		} else {
+			poorMansDebugging('No profiles found for this user.');
+		}
+	} else {
+		poorMansDebugging('There was an error querying profiles: ' + response.message);
+	}
+}
+
+function queryCoreReportingApi(profileId) {
+	poorMansDebugging('Querying Core Reporting API.');
+	gapi.client.analytics.data.ga.get({
+		'ids': 'ga:' + profileId,
+		'start-date': lastNDays(14),
+		'end-date': lastNDays(0),
+		'metrics': 'ga:pageviews,ga:uniquePageviews',
+		'dimensions': 'ga:pagePath,ga:pageTitle',
+		'sort': '-ga:pageviews',
+		'filters': 'ga:pagePath!=/',
+		'max-results': 5
+	}).execute(handleCoreReportingResults);
+}
+
+function handleCoreReportingResults(response) {
+	console.log(response);
+	console.log(response.rows);
+
+	if (!response.code) {
+		if (response.rows && response.rows.length) {
+			var list = ['<ol>'];
+
+			// Put cells in table.
+			for (var i = 0, row; row = response.rows[i]; ++i) {
+				list.push('<li>');
+					list.push('<a href="' + row[0] + '" alt="' + row[1] + '" data-pagewievs="' + row[2] + '" data-pagewievs-unique="' + row[3] + '">' + row[1] + '</a>');
+				list.push('</li>');
+			}
+			list.push('</ol>');
+
+			document.querySelector('.latest-posts');
+			output.push(list.join(''));
+		} else {
+			poorMansDebugging('No results found.');
+		}
+	} else {
+		poorMansDebugging('There was an error querying core reporting API: ' + response.message);
+	}
+}
+
+function lastNDays(n) {
+	var today = new Date();
+	var before = new Date();
+	before.setDate(today.getDate() - n);
+
+	var year = before.getFullYear();
+
+	var month = before.getMonth() + 1;
+	if (month < 10) {
+		month = '0' + month;
+	}
+
+	var day = before.getDate();
+	if (day < 10) {
+		day = '0' + day;
+	}
+
+	return [year, month, day].join('-');
+}
+</script>
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad" async></script>

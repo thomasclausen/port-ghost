@@ -25,11 +25,6 @@
 	</header>
 	<div class="site-content" role="main">
 		{{{body}}}
-
-		<button id="authorize-button" style="visibility: hidden">Authorize</button>
-		<button id="run-demo-button" style="visibility: hidden">Run Demo</button>
-		<hr>
-		<div id="output">Loading, one sec....</div>
 	</div>
 	<footer class="site-footer" role="contentinfo">
 		<div class="copyright">&copy; {{date format="YYYY"}} <a href="https://github.com/thomasclausen/port-ghost/" target="_blank">Port</a>. Proudly powered by <a href="http://tryghost.org" target="_blank">Ghost</a>.</div>
@@ -41,7 +36,6 @@
 <script type="text/javascript" src="{{asset "js/classie.js"}}"></script>
 <script type="text/javascript" src="{{asset "js/script.js"}}"></script>
 <!-- endbuild -->
-<script src="https://apis.google.com/js/client.js?onload=handleClientLoad" async></script>
 
 {{ghost_foot}}
 </body>
