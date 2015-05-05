@@ -5,18 +5,15 @@
 		<div class="page-content">
 			<h1 class="page-title">{{title}}</h2>
 			{{content}}
+
+			<button id="authorize-button" style="visibility: hidden">Authorize</button>
+			<hr />
+			<aside class="latest-posts">
+				<h4>Top 5 posts - Our top posts right now</h4>
+			</aside>
 		</div>
 	</article>
 {{/post}}
-
-<button id="authorize-button" style="visibility: hidden">Authorize</button>
-<button id="run-demo-button" style="visibility: hidden">Run Demo</button>
-<hr />
-<div id="output">Loading, one sec....</div>
-
-<aside class="latest-posts">
-	<h4>Top 5 posts - Our top posts right now</h4>
-</aside>
 
 <script type="text/javascript">
 // https://github.com/google/google-api-javascript-client/tree/master/samples/analytics/v3
@@ -35,7 +32,6 @@ function poorMansDebugging(string) {
 }
 
 function handleClientLoad() {
-	poorMansDebugging('loaded');
 	gapi.client.setApiKey(API_KEY);
 	window.setTimeout(checkAuth, 1);
 }
@@ -52,24 +48,11 @@ function handleAuthResult(authResult) {
 	}
 }
 
-function handleAuthorized() {
-	var authorizeButton = document.getElementById('authorize-button'),
-		runDemoButton = document.getElementById('run-demo-button');
-
-	authorizeButton.style.visibility = 'hidden';
-	runDemoButton.style.visibility = '';
-	runDemoButton.onclick = makeApiCall;
-	poorMansDebugging('Click the Run Demo button to begin.');
-}
-
 function handleUnauthorized() {
-	var authorizeButton = document.getElementById('authorize-button'),
-		runDemoButton = document.getElementById('run-demo-button');
+	var authorizeButton = document.getElementById('authorize-button');
 
-	runDemoButton.style.visibility = 'hidden';
 	authorizeButton.style.visibility = '';
 	authorizeButton.onclick = handleAuthClick;
-	poorMansDebugging('Please authorize this script to access Google Analytics.');
 }
 
 function handleAuthClick(event) {
@@ -78,11 +61,10 @@ function handleAuthClick(event) {
 }
 
 function loadAnalyticsClient() {
-	gapi.client.load('analytics', 'v3', handleAuthorized);
+	gapi.client.load('analytics', 'v3', makeApiCall);
 }
 
 function makeApiCall() {
-	poorMansDebugging('Querying Accounts.');
 	gapi.client.analytics.management.accounts.list().execute(handleAccounts);
 }
 
@@ -100,14 +82,12 @@ function handleAccounts(response) {
 }
 
 function queryWebproperties(accountId) {
-	poorMansDebugging('Querying Webproperties.');
 	gapi.client.analytics.management.webproperties.list({'accountId': accountId}).execute(handleWebproperties);
 }
 
 function handleWebproperties(response) {
 	if (!response.code) {
 		if (response && response.items && response.items.length) {
-			console.log(response.items);
 			var firstAccountId = response.items[2].accountId;
 			var firstWebpropertyId = response.items[2].id;
 			queryProfiles(firstAccountId, firstWebpropertyId);
@@ -120,14 +100,12 @@ function handleWebproperties(response) {
 }
 
 function queryProfiles(accountId, webpropertyId) {
-	poorMansDebugging('Querying Profiles.');
 	gapi.client.analytics.management.profiles.list({'accountId': accountId, 'webPropertyId': webpropertyId}).execute(handleProfiles);
 }
 
 function handleProfiles(response) {
 	if (!response.code) {
 		if (response && response.items && response.items.length) {
-			console.log(response.items);
 			var firstProfileId = response.items[0].id;
 			queryCoreReportingApi(firstProfileId);
 		} else {
@@ -139,7 +117,6 @@ function handleProfiles(response) {
 }
 
 function queryCoreReportingApi(profileId) {
-	poorMansDebugging('Querying Core Reporting API.');
 	gapi.client.analytics.data.ga.get({
 		'ids': 'ga:' + profileId,
 		'start-date': lastNDays(14),
@@ -160,7 +137,6 @@ function handleCoreReportingResults(response) {
 		if (response.rows && response.rows.length) {
 			var list = ['<ol>'];
 
-			// Put cells in table.
 			for (var i = 0, row; row = response.rows[i]; ++i) {
 				list.push('<li>');
 					list.push('<a href="' + row[0] + '" alt="' + row[1] + '" data-pagewievs="' + row[2] + '" data-pagewievs-unique="' + row[3] + '">' + row[1] + '</a>');
@@ -168,8 +144,7 @@ function handleCoreReportingResults(response) {
 			}
 			list.push('</ol>');
 
-			document.querySelector('.latest-posts');
-			output.push(list.join(''));
+			document.querySelector('.latest-posts').innerHTML += list.join('');
 		} else {
 			poorMansDebugging('No results found.');
 		}
