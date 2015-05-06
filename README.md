@@ -2,7 +2,25 @@
 
 **Port** is a simple theme with a single purpose - to bring your portfolio in focus and enable you to showcase your awesomeness.
 
-It's build for the [Ghost blogging platform](http://tryghost.org), which enables you to keep your portfolio up-to-date with ease.
+Taking advantage of the easy editing interface inside [Ghost](https://ghost.org) and this themes simple structure, you are able to keep your portfolio up-to-date with ease.
+
+## Installing
+
+Setting up your blog with this theme is done in four easy steps no matter if your on [Ghost(Pro)](https://ghost.org/pricing/) og self-hosting.
+
+### [Ghost(Pro)](https://ghost.org/pricing/)
+1. Download [port-ghost.zip](https://github.com/thomasclausen/port-ghost/blob/master/port-ghost.zip?raw=true) from Github
+2. Log in to your [Ghost account](https://ghost.org/login/)
+3. Click on your blogs name (or the settings icon) to edit the blogs settings
+4. Click on *Upload a New Theme* and select the downloaded zip-file
+
+### Self-hosting
+1. Download [port-ghost.zip](https://github.com/thomasclausen/port-ghost/blob/master/port-ghost.zip?raw=true) or the folder [**port**](https://github.com/thomasclausen/port-ghost/tree/master/port) from Github
+2. Copy the folder **port** into the Ghost theme directory `ghost/content/themes/`
+3. Restart Ghost
+4. Log in to your dashboard and navigate to *Settings > General > Theme*, select **Port** and save
+
+That's all... enjoy!
 
 ## Feedback
 
