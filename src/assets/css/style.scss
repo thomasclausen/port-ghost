@@ -572,7 +572,8 @@ del {
 		opacity: 0.5;
 		transition: opacity 0.4s;
 
-		&:hover {
+		&:hover,
+		&:target {
 			opacity: 1;
 		}
 	}
