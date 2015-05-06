@@ -16,7 +16,8 @@
 {{/post}}
 
 <script type="text/javascript">
-// https://github.com/google/google-api-javascript-client/tree/master/samples/analytics/v3
+// https://github.com/google/google-api-javascript-client/
+// https://github.com/google/google-api-nodejs-client/
 // https://developers.google.com/analytics/solutions/articles/hello-analytics-api#query_sessions
 // https://developers.google.com/analytics/devguides/reporting/embed/v1/custom-components
 // https://ga-dev-tools.appspot.com/embed-api/custom-components/
@@ -33,35 +34,24 @@ function poorMansDebugging(string) {
 
 function handleClientLoad() {
 	gapi.client.setApiKey(API_KEY);
-	window.setTimeout(checkAuth, 1);
-}
-
-function checkAuth() {
-	gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: true}, handleAuthResult);
+	window.setTimeout(function () {
+		gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: true}, handleAuthResult);
+	}, 1);
 }
 
 function handleAuthResult(authResult) {
 	if (authResult) {
-		loadAnalyticsClient();
+		gapi.client.load('analytics', 'v3', makeApiCall);
 	} else {
-		handleUnauthorized();
+		var authorizeButton = document.getElementById('authorize-button');
+
+		authorizeButton.style.visibility = '';
+		authorizeButton.onclick = function () {
+			gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: false}, handleAuthResult);
+			return false;
+		};
+		handleAuthClick;
 	}
-}
-
-function handleUnauthorized() {
-	var authorizeButton = document.getElementById('authorize-button');
-
-	authorizeButton.style.visibility = '';
-	authorizeButton.onclick = handleAuthClick;
-}
-
-function handleAuthClick(event) {
-	gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: false}, handleAuthResult);
-	return false;
-}
-
-function loadAnalyticsClient() {
-	gapi.client.load('analytics', 'v3', makeApiCall);
 }
 
 function makeApiCall() {
@@ -72,7 +62,7 @@ function handleAccounts(response) {
 	if (!response.code) {
 		if (response && response.items && response.items.length) {
 			var firstAccountId = response.items[0].id;
-			queryWebproperties(firstAccountId);
+			gapi.client.analytics.management.webproperties.list({'accountId': firstAccountId}).execute(handleWebproperties);
 		} else {
 			poorMansDebugging('No accounts found for this user.');
 		}
@@ -81,16 +71,12 @@ function handleAccounts(response) {
 	}
 }
 
-function queryWebproperties(accountId) {
-	gapi.client.analytics.management.webproperties.list({'accountId': accountId}).execute(handleWebproperties);
-}
-
 function handleWebproperties(response) {
 	if (!response.code) {
 		if (response && response.items && response.items.length) {
 			var firstAccountId = response.items[2].accountId;
 			var firstWebpropertyId = response.items[2].id;
-			queryProfiles(firstAccountId, firstWebpropertyId);
+			gapi.client.analytics.management.profiles.list({'accountId': firstAccountId, 'webPropertyId': firstWebpropertyId}).execute(handleProfiles);
 		} else {
 			poorMansDebugging('No webproperties found for this user.');
 		}
@@ -99,34 +85,26 @@ function handleWebproperties(response) {
 	}
 }
 
-function queryProfiles(accountId, webpropertyId) {
-	gapi.client.analytics.management.profiles.list({'accountId': accountId, 'webPropertyId': webpropertyId}).execute(handleProfiles);
-}
-
 function handleProfiles(response) {
 	if (!response.code) {
 		if (response && response.items && response.items.length) {
 			var firstProfileId = response.items[0].id;
-			queryCoreReportingApi(firstProfileId);
+			gapi.client.analytics.data.ga.get({
+				'ids': 'ga:' + firstProfileId,
+				'start-date': lastNDays(14),
+				'end-date': lastNDays(0),
+				'metrics': 'ga:pageviews,ga:uniquePageviews',
+				'dimensions': 'ga:pagePath,ga:pageTitle',
+				'sort': '-ga:pageviews',
+				'filters': 'ga:pagePath!=/',
+				'max-results': 5
+			}).execute(handleCoreReportingResults);
 		} else {
 			poorMansDebugging('No profiles found for this user.');
 		}
 	} else {
 		poorMansDebugging('There was an error querying profiles: ' + response.message);
 	}
-}
-
-function queryCoreReportingApi(profileId) {
-	gapi.client.analytics.data.ga.get({
-		'ids': 'ga:' + profileId,
-		'start-date': lastNDays(14),
-		'end-date': lastNDays(0),
-		'metrics': 'ga:pageviews,ga:uniquePageviews',
-		'dimensions': 'ga:pagePath,ga:pageTitle',
-		'sort': '-ga:pageviews',
-		'filters': 'ga:pagePath!=/',
-		'max-results': 5
-	}).execute(handleCoreReportingResults);
 }
 
 function handleCoreReportingResults(response) {
