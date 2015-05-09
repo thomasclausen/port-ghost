@@ -36,12 +36,14 @@
 	if (iframes.length !== 0) {
 		for (var i = 0; i < iframes.length; i++) {
 			var iframe = iframes[i],
-				ratio = '';
+				ratio = 56.25;
 
-			if (iframe.getAttribute('width') > iframe.getAttribute('height')) {
-				ratio = (iframe.getAttribute('height') / iframe.getAttribute('width')) * 100;
-			} else {
-				ratio = (iframe.getAttribute('width') / iframe.getAttribute('height')) * 100;
+			if (iframe.getAttribute('width') !== null && iframe.getAttribute('height') !== null) {
+				if (iframe.getAttribute('width') > iframe.getAttribute('height')) {
+					ratio = (iframe.getAttribute('height') / iframe.getAttribute('width')) * 100;
+				} else {
+					ratio = (iframe.getAttribute('width') / iframe.getAttribute('height')) * 100;
+				}
 			}
 
 			iframe.outerHTML = '<div class="embed-responsive" style="padding-bottom:' + ratio + '%">' + iframe.outerHTML + '</div>';
