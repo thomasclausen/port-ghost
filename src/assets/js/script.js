@@ -12,6 +12,12 @@
 			'iframe[src*="youtube.com"]',
 			'iframe[src*="youtube-nocookie.com"]',
 			'iframe[src*="kickstarter.com"][src*="video.html"]',
+			'iframe[src*="blip.tv"]',
+			'iframe[src*="ted.com"]',
+			'iframe[src*="google.com/maps/"]',
+			'iframe[src*="dailymotion.com"]',
+			'iframe[src*="flickr.com"]',
+			'iframe[src*="hulu.com"]',
 			'embed[src*="wordpress.com"]'
 		],
 		videos = document.querySelectorAll(videoSelectors.join(','));
