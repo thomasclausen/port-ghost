@@ -7,7 +7,13 @@
 
 	var documentState = null,
 		body = document.body,
-		iframes = document.getElementsByTagName('iframe');
+		iframeSelectors = [
+			'iframe[src*="player.vimeo.com"]',
+			'iframe[src*="youtube.com"]',
+			'iframe[src*="youtube-nocookie.com"]',
+			'iframe[src*="kickstarter.com"][src*="video.html"]'
+		],
+		iframes = document.querySelectorAll(iframeSelectors.join(','));
 
 	function poorMansDebugging(string) {
 		if (window.console) {
