@@ -50,4 +50,13 @@
 			video.outerHTML = '<div class="embed-responsive" style="padding-bottom:' + ratio + '%">' + video.outerHTML + '</div>';
 		}
 	}
+
+	window.addEventListener('resize', function () {
+		var embedVideos = document.querySelectorAll('embed[src*="wordpress.com"]');
+		if (embedVideos.length !== 0) {
+			for (var i = 0; i < embedVideos.length; i++) {
+				embedVideos[i].outerHTML = embedVideos[i].outerHTML;
+			}
+		}
+	});
 })();
