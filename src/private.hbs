@@ -7,6 +7,9 @@
 	<div class="error-content">
 		<h1 class="error-title">SORRY, this blog is private!</h2>
 		<p>To have a look behind this locked door, enter your password below.</p>
+		{{#if error}}
+			{{error.message}}
+		{{/if}}
 		<form id="setup" class="setup-form private-login" method="post" novalidate="novalidate">
 			<input type="hidden" name="forward" value="{{forward}}" />
 			<fieldset>
