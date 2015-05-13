@@ -4,6 +4,7 @@
 	<article id="post-{{id}}" class="{{post_class}}" role="article">
 		<div class="post-content">
 			<h1 class="post-title">{{title}}</h1>
+			<p class="post-meta"><strong>Reading time:</strong> approx. <span class="reading-time" data-post-length="{{this.markdown.length}}"></span> min.</p>
 			{{tags prefix="<p><strong>Tags:</strong> " seperator=", " suffix="</p>"}}
 			{{content}}
 		</div>
