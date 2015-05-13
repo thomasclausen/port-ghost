@@ -11,14 +11,36 @@
 			{{error.message}}
 		{{/if}}
 		<form id="setup" class="setup-form private-login" method="post" novalidate="novalidate">
-			<input type="hidden" name="forward" value="{{forward}}" />
 			<fieldset>
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" class="private-login-password" />
+				{{input_password}}
 			</fieldset>
 			<fieldset class="button">
 				<button type="submit" class="private-login">Let me in!</button>
 			</fieldset>
+
+			<fieldset>
+				<input type="checkbox" name="checkkbox1" id="checkkbox1" />
+				<label for="checkkbox1">Password</label>
+			</fieldset>
+			<fieldset>
+				<input type="radio" name="radio1" id="radio1" />
+				<label for="radio1">Password</label>
+			</fieldset>
+
+			<input type="tel"/>
+			<input type="text" pattern="[0-9]*" />
+			<input type="email" />
+			<input type="search" />
+
+			<textarea></textarea>
+
+			<select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select>
 		</form>
 	</div>
 </article>

@@ -11,9 +11,10 @@
 
 	 0.  SASS
 	 1.  Typography
-	 2.  Header
-	 3.  Content Styles
-	 4.  Footer
+	 2.  Forms
+	 3.  Header
+	 4.  Content Styles
+	 5.  Footer
 
  */
 
@@ -184,7 +185,86 @@ del {
 }
 
 /* ==========================================================================
-	 2. Header
+	 2. Forms
+	 ========================================================================== */
+
+fieldset {
+	padding: 0.5em 0;
+	border: none;
+	margin-right: 0;
+	margin-left: 0;
+
+	&.button {
+		text-align: center;
+		margin-top: 2em;
+	}
+}
+
+input,
+button,
+select,
+textarea {
+	width: 100%;
+	color: #555;
+	padding: 1em 1.5em;
+	background: $white;
+	border: none;
+	@include border-radius;
+	box-shadow: 0 1px 3px 0 rgba(153, 153, 153, 0.5);
+}
+
+input.button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+	width: auto;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: $white;
+	background: $primary-color;
+	position: relative;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	display: none;
+
+	&:not(:checked) + label:before {
+		background-image: none;
+	}
+
+	+ label {
+		padding-left: 2em;
+		position: relative;
+		cursor: pointer;
+
+		&:before {
+			width: 1em;
+			height: 1em;
+			background-color: $white;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			background-size: 1em auto;
+			border: 1px solid $primary-color;
+			margin-right: 1em;
+			display: inline-block;
+			vertical-align: middle;
+			content: '';
+
+		}
+	}
+}
+input[type="checkbox"] + label:before {
+	background-image: url(../images/checkbox-checked-icon.svg);
+}
+input[type="radio"] + label:before {
+	border-radius: 50%;
+	background-image: url(../images/radiobutton-checked-icon.svg);
+}
+
+/* ==========================================================================
+	 3. Header
 	 ========================================================================== */
 
 .site-header {
@@ -266,7 +346,7 @@ del {
 }
 
 /* ==========================================================================
-	 3. Content Styles
+	 4. Content Styles
 	 ========================================================================== */
 
 .wrap {
@@ -593,7 +673,7 @@ del {
 }
 
 /* ==========================================================================
-	 4. Footer
+	 5. Footer
 	 ========================================================================== */
 
 .site-footer {
