@@ -189,10 +189,9 @@ del {
 	 ========================================================================== */
 
 fieldset {
-	padding: 0.5em 0;
+	padding: 0;
 	border: none;
-	margin-right: 0;
-	margin-left: 0;
+	margin: 0.5em 0;
 
 	&.button {
 		text-align: center;
@@ -201,9 +200,7 @@ fieldset {
 }
 
 input,
-button,
-select,
-textarea {
+button {
 	width: 100%;
 	color: #555;
 	padding: 1em 1.5em;
@@ -222,45 +219,8 @@ button {
 	font-weight: 700;
 	text-transform: uppercase;
 	color: $white;
-	background: $primary-color;
+	background: $secondary-color;
 	position: relative;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-	display: none;
-
-	&:not(:checked) + label:before {
-		background-image: none;
-	}
-
-	+ label {
-		padding-left: 2em;
-		position: relative;
-		cursor: pointer;
-
-		&:before {
-			width: 1em;
-			height: 1em;
-			background-color: $white;
-			background-repeat: no-repeat;
-			background-position: 50% 50%;
-			background-size: 1em auto;
-			border: 1px solid $primary-color;
-			margin-right: 1em;
-			display: inline-block;
-			vertical-align: middle;
-			content: '';
-
-		}
-	}
-}
-input[type="checkbox"] + label:before {
-	background-image: url(../images/checkbox-checked-icon.svg);
-}
-input[type="radio"] + label:before {
-	border-radius: 50%;
-	background-image: url(../images/radiobutton-checked-icon.svg);
 }
 
 /* ==========================================================================
