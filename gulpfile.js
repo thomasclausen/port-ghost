@@ -29,12 +29,14 @@ var paths = {
   ],
   images: 'src/assets/images/*',
   default: 'src/default.hbs',
+  private: 'src/private.hbs',
 
   copy: {
     root: [
       'src/*.hbs',
       'src/*.json',
-      '!src/default.hbs'
+      '!src/default.hbs',
+      '!src/private.hbs'
     ],
     js: '',
     partials_root: 'src/partials/*.hbs',
@@ -120,7 +122,19 @@ gulp.task('copy', function() {
 });
 
 gulp.task('replace', function() {
-  return gulp.src(paths.default)
+  gulp.src(paths.default)
+    .pipe(htmlreplace({
+      css: {
+        src: '{{asset "css/' + pkg.name + '.min.css"}}',
+        tpl: '<link rel="stylesheet" id="' + pkg.name + '-css" href="%s" />'
+      },
+      js: {
+        src: '{{asset "js/' + pkg.name + '.min.js"}}',
+        tpl: '<script type="text/javascript" src="%s" async></script>'
+      }
+    }))
+    .pipe(gulp.dest(pkg.name));
+  gulp.src(paths.private)
     .pipe(htmlreplace({
       css: {
         src: '{{asset "css/' + pkg.name + '.min.css"}}',
@@ -139,6 +153,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.images, ['images']);
   gulp.watch(paths.default, ['replace']);
+  gulp.watch(paths.private, ['replace']);
   gulp.watch(paths.copy.root, ['copy']);
   gulp.watch(paths.copy.fonts, ['copy']);
   gulp.watch(paths.copy.js, ['copy']);
@@ -151,6 +166,7 @@ gulp.task('watch-upload', function() {
   gulp.watch(paths.scripts, ['scripts-upload']);
   gulp.watch(paths.images, ['images-upload']);
   gulp.watch(paths.default, ['files-upload']);
+  gulp.watch(paths.private, ['files-upload']);
   gulp.watch(paths.copy.root, ['files-upload']);
   gulp.watch(paths.copy.fonts, ['files-upload']);
   gulp.watch(paths.copy.js, ['files-upload']);
