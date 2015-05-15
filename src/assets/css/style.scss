@@ -188,6 +188,12 @@ del {
 	 2. Forms
 	 ========================================================================== */
 
+form {
+	max-width: 360px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 fieldset {
 	padding: 0;
 	border: none;
@@ -320,6 +326,10 @@ button {
 .site-content {
 	padding-right: 5%;
 	padding-left: 5%;
+
+	.private-template & {
+		padding-top: 6em;
+	}
 }
 
 .post {
