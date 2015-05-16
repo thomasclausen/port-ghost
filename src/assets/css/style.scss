@@ -27,6 +27,8 @@ $primary-font-stack: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $primary-color: #25292c;
 $secondary-color: #4ac2be;
 
+$error-color: #f55045;
+
 $white: #fff;
 $grey-light: #efefef;
 $grey-medium: #878788;
@@ -189,44 +191,49 @@ del {
 	 ========================================================================== */
 
 form {
-	max-width: 360px;
-	margin-right: auto;
-	margin-left: auto;
-}
+	max-width: 480px;
 
-fieldset {
-	padding: 0;
-	border: none;
-	margin: 0.5em 0;
-
-	&.button {
-		text-align: center;
-		margin-top: 2em;
+	@media (min-width: 48em) {
+		margin-right: auto;
+		margin-left: auto;
 	}
 }
 
-input,
-button {
-	width: 100%;
-	color: #555;
-	padding: 1em 1.5em;
-	background: $white;
+fieldset {
+	padding: 0 8em 0 0;
 	border: none;
-	@include border-radius;
-	box-shadow: 0 1px 3px 0 rgba(153, 153, 153, 0.5);
+	margin: 2em 0;
+	position: relative;
+
+	@media (min-width: 48em) {
+		padding-right: 11em;
+	}
 }
 
-input.button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
+input {
+	width: 100%;
+	color: $grey-medium;
+	padding: 1em;
+	background: none;
+	border: none;
+	border-bottom: 1px solid $grey-medium;
+}
+
 button {
-	width: auto;
+	width: 7em;
 	font-weight: 700;
 	text-transform: uppercase;
 	color: $white;
+	padding: 1em 0;
 	background: $secondary-color;
-	position: relative;
+	border: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	@media (min-width: 48em) {
+		width: 10em;
+	}
 }
 
 /* ==========================================================================
@@ -329,6 +336,7 @@ button {
 
 	.private-template & {
 		padding-top: 6em;
+		padding-bottom: 6em;
 	}
 }
 
@@ -363,7 +371,8 @@ button {
 			@include border-radius(50%);
 		}
 	}
-	.error-image {
+	.error-image,
+	.private-image {
 		width: 15em;
 		height: 14em;
 		margin: 0 auto 2em auto;
@@ -418,7 +427,8 @@ button {
 		}
 	}
 	.page-content,
-	.error-content {
+	.error-content,
+	.private-content {
 		max-width: 760px;
 		margin-right: auto;
 		margin-left: auto;
@@ -430,6 +440,10 @@ button {
 			margin-top: 0.25em;
 			margin-bottom: 0.25em;
 		}
+	}
+	.private-error {
+		font-weight: 700;
+		color: $error-color;
 	}
 }
 

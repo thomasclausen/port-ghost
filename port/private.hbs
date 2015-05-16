@@ -15,21 +15,18 @@
 <body class="{{body_class}}">
 <div class="wrap">
 	<div class="site-content" role="main">
-		<article id="error-{{code}}" class="{{post_class}}" role="article">
-			<div class="error-image">
+		<article id="private" class="{{post_class}}" role="article">
+			<div class="private-image">
 				<span>&times;</span>
 			</div>
-			<div class="error-content">
-				<h1 class="error-title">SORRY, this blog is private!</h2>
-				<p>To have a look behind this locked door, enter your password below.</p>
+			<div class="private-content">
+				<h1 class="private-title">SORRY, this blog is private!</h2>
 				{{#if error}}
-					{{error.message}}
+					<p class="login-error">{{error.message}}</p>
 				{{/if}}
 				<form method="post" id="setup" novalidate="novalidate">
 					<fieldset>
 						<input type="password" name="password" placeholder="Password" />
-					</fieldset>
-					<fieldset class="button">
 						<button type="submit">Let me in!</button>
 					</fieldset>
 				</form>
