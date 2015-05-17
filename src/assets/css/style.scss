@@ -99,6 +99,20 @@ a {
 	&:focus {
 		color: $primary-color;
 	}
+
+	&[href^="#fn:"] {
+		font-weight: 700;
+		padding-right: 0.25em;
+		padding-left: 0.25em;
+		border-bottom: 1px solid $secondary-color;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+
+		&:hover,
+		&:focus {
+			border-bottom-color: $primary-color;
+		}
+	}
 }
 img {
 	width: auto;
@@ -345,6 +359,13 @@ del {
 				}
 			}
 		}
+		.footnotes {
+
+			p {
+				padding-right: 0;
+				padding-left: 0;
+			}
+		}
 	}
 	.page-content,
 	.error-content {
@@ -558,19 +579,6 @@ del {
 	}
 }
 
-.footnote {
-	font-weight: 700;
-	padding-right: 0.25em;
-	padding-left: 0.25em;
-	border-bottom: 1px solid $secondary-color;
-	margin-right: 0.5em;
-	margin-left: 0.5em;
-
-	&:hover,
-	&:focus {
-		border-bottom-color: $primary-color;
-	}
-}
 .footnotes {
 	max-width: 760px;
 	font-size: 1.4rem;
@@ -589,6 +597,11 @@ del {
 		&:hover,
 		&:target {
 			opacity: 1;
+		}
+
+		p {
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 	}
 }
