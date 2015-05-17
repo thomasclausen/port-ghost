@@ -284,12 +284,9 @@ del {
 
 .post {
 	max-width: 60em;
+	text-align: center;
 	margin-right: auto;
 	margin-left: auto;
-
-	@media (min-width: 48em) {
-		text-align: center;
-	}
 
 	&.page {
 		text-align: left;
