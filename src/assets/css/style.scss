@@ -11,7 +11,7 @@
 
 	 0.  SASS
 	 1.  Typography
-	 2.  Forms
+	 2.  Form
 	 3.  Header
 	 4.  Content Styles
 	 5.  Footer
@@ -187,11 +187,11 @@ del {
 }
 
 /* ==========================================================================
-	 2. Forms
+	 2. Form
 	 ========================================================================== */
 
 form {
-	max-width: 480px;
+	max-width: 30em;
 
 	@media (min-width: 48em) {
 		margin-right: auto;
@@ -217,6 +217,7 @@ input {
 	background: none;
 	border: none;
 	border-bottom: 1px solid $grey-medium;
+	@include border-radius(0);
 }
 
 button {
@@ -335,8 +336,13 @@ button {
 	padding-left: 5%;
 
 	.private-template & {
-		padding-top: 6em;
-		padding-bottom: 6em;
+		padding-top: 3em;
+		padding-bottom: 3em;
+
+		@media (min-width: 48em) {
+			padding-top: 6em;
+			padding-bottom: 6em;
+		}
 	}
 }
 
