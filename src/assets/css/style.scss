@@ -380,6 +380,20 @@ del {
 			margin-top: 0.25em;
 			margin-bottom: 0.25em;
 		}
+
+		.caption {
+			text-align: left;
+			padding-right: 10%;
+			padding-left: 30%;
+			margin-top: 0.5em;
+			margin-bottom: 1.5em;
+			opacity: 0.5;
+			text-indent: -1em;
+
+			&:before {
+				content: '\2191\2002';
+			}
+		}
 	}
 }
 
