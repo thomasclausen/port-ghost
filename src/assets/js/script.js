@@ -55,17 +55,6 @@
 			}
 
 			video.outerHTML = '<div class="embed-responsive" style="padding-bottom:' + ratio + '%">' + video.outerHTML + '</div>';
-
-			if (video.src.indexOf('google.com/maps/') !== -1) {
-				window.addEventListener('resize', function () {
-					var embedMaps = document.querySelectorAll('iframe[src*="google.com/maps/"]');
-					if (embedMaps.length !== 0) {
-						for (var i = 0; i < embedMaps.length; i++) {
-							embedMaps[i].outerHTML = embedMaps[i].outerHTML;
-						}
-					}
-				});
-			}
 		}
 	}
 })();
