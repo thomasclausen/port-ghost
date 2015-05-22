@@ -7,7 +7,7 @@
 
 	var documentState = null,
 		body = document.body,
-		videoSelectors = [
+		embedSelectors = [
 			'iframe[src*="player.vimeo.com"]',
 			'iframe[src*="youtube.com"]',
 			'iframe[src*="youtube-nocookie.com"]',
@@ -21,7 +21,7 @@
 			'iframe[src*="hulu.com"]',
 			'embed[src*="wordpress.com"]'
 		],
-		videos = document.querySelectorAll(videoSelectors.join(','));
+		embeds = document.querySelectorAll(embedSelectors.join(','));
 
 	function poorMansDebugging(string) {
 		if (window.console) {
@@ -41,20 +41,20 @@
 		}
 	}, 100);
 
-	if (videos.length !== 0) {
-		for (var i = 0; i < videos.length; i++) {
-			var video = videos[i],
+	if (embeds.length !== 0) {
+		for (var i = 0; i < embeds.length; i++) {
+			var embed = embeds[i],
 				ratio = 56.25;
 
-			if (video.getAttribute('width') !== null && video.getAttribute('height') !== null) {
-				if (video.getAttribute('width') > video.getAttribute('height')) {
-					ratio = (video.getAttribute('height') / video.getAttribute('width')) * 100;
+			if (embed.getAttribute('width') !== null && embed.getAttribute('height') !== null) {
+				if (embed.getAttribute('width') > embed.getAttribute('height')) {
+					ratio = (embed.getAttribute('height') / embed.getAttribute('width')) * 100;
 				} else {
-					ratio = (video.getAttribute('width') / video.getAttribute('height')) * 100;
+					ratio = (embed.getAttribute('width') / embed.getAttribute('height')) * 100;
 				}
 			}
 
-			video.outerHTML = '<div class="embed-responsive" style="padding-bottom:' + ratio + '%">' + video.outerHTML + '</div>';
+			embed.outerHTML = '<div class="embed-responsive" style="padding-bottom:' + ratio + '%">' + embed.outerHTML + '</div>';
 		}
 	}
 })();
