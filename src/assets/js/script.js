@@ -13,6 +13,7 @@
 			'iframe[src*="youtube-nocookie.com"]',
 			'iframe[src*="kickstarter.com"][src*="video.html"]',
 			'iframe[src*="blip.tv"]',
+			'iframe[src*="slideshare.net"]',
 			'iframe[src*="ted.com"]',
 			'iframe[src*="google.com/maps/"]',
 			'iframe[src*="dailymotion.com"]',
