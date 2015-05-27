@@ -24,7 +24,7 @@ That's all... enjoy!
 
 ## Feedback
 
-Found a bug? Please [create an issue](https://github.com/thomasclausen/port-ghost/issues) on GitHub, and I'll do my best to fix it.
+Found a bug? Please [create an issue](https://github.com/thomasclausen/port-ghost/issues) on GitHub, and I'll do my best to fix it, or if you have a bugfix ready, a pull-request are more then welcome.
 
 Also feel free to [create an issue](https://github.com/thomasclausen/port-ghost/issues) if you have a great idea for an improvement or think there's a feature missing.
 
