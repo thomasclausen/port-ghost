@@ -7,9 +7,7 @@
 			{{tags prefix="<p><strong>Tags:</strong> " seperator=", " suffix="</p>"}}
 			{{content}}
 		</div>
-		<div class="total-share-count" data-total-share-url="{{url absolute="true"}}">{{url absolute="true"}} - <span class="total-count">0</span></div>
-		<div class="total-share-count" data-total-share-url="http://svommeklubbennord.dk/traeningslejr-for-talent-og-k3-i-loekken/">http://svommeklubbennord.dk/traeningslejr-for-talent-og-k3-i-loekken/ - <span class="total-count">0</span></div>
-		<div class="total-share-count" data-total-share-url="http://blog.squarespace.com/blog/squarespace-in-the-mobile-age">http://blog.squarespace.com/blog/squarespace-in-the-mobile-age - <span class="total-count">0</span></div>
+		<div class="total-share-count" data-total-share-url="{{url absolute="true"}}">Shares: <span class="total-count">0</span></div>
 	</article>
 
 	<nav class="post-pagination" role="navigation">
@@ -27,15 +25,12 @@
 <script>
 var totalShareCount = 0;
 function getTotalShare() {
-	console.log('total: ' + totalShareCount);
+	document.querySelector('.total-share-count .total-count').innerHTML = totalShareCount;
 }
-
 function getShares(data) {
 	if (data.shares) {
-		console.log(data.shares);
 		totalShareCount += data.shares;
 	} else {
-		console.log(data.count);
 		totalShareCount += data.count;
 	}
 
