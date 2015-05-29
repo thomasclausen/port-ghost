@@ -23,18 +23,26 @@
 {{/post}}
 
 <script>
-var totalShareCount = 0;
-function getTotalShare() {
-	document.querySelector('.total-share-count .total-count').innerHTML = totalShareCount;
-}
-function getShares(data) {
-	if (data.shares) {
-		totalShareCount += data.shares;
-	} else {
-		totalShareCount += data.count;
-	}
+var totalShareCount = 0,
+	totalShareCurrent = 0,
+	animateShareCountInterval = null;
 
-	getTotalShare();
+function animateShareCount() {
+	console.log('Hello');
+	totalShareCurrent++;
+	if (totalShareCurrent === totalShareCount) {
+		console.log('I should stop now');
+		clearInterval(animateShareCountInterval);
+	}
+	document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
+}
+
+function getShares(data) {
+	totalShareCount += data.shares ? data.shares : data.count;
+	console.log('total: ' + totalShareCount);
+	if (animateShareCountInterval === null) {
+		animateShareCountInterval = setInterval(animateShareCount, 50);
+	}
 }
 </script>
 <script id="facebook" src="https://graph.facebook.com/?id=https://squareup.com/townsquare/how-to-use-social-media-to-market-your-online-store/&callback=getShares" async></script>
