@@ -29,7 +29,13 @@ var totalShareCount = 0,
 
 function animateShareCount() {
 	console.log('Hello');
-	totalShareCurrent++;
+	if (totalShareCount - totalShareCurrent > 50) {
+		totalShareCurrent += 49;
+	} else if (totalShareCount - totalShareCurrent > 10) {
+		totalShareCurrent += 9;
+	} else {
+		totalShareCurrent++;
+	}
 	if (totalShareCurrent === totalShareCount) {
 		console.log('I should stop now');
 		clearInterval(animateShareCountInterval);
