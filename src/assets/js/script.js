@@ -16,7 +16,6 @@
 	}
 
 	function init() {
-		// Do something
 		if (classie.hasClass(body, 'post-template')) {
 			var wordsPerMinute = 200,
 				postContent = document.querySelector('.post-content').textContent,
