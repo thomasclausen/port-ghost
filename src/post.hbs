@@ -28,7 +28,6 @@ var totalShareCount = 0,
 	animateShareCountInterval = null;
 
 function animateShareCount() {
-	console.log('Hello');
 	if (totalShareCount - totalShareCurrent > 50) {
 		totalShareCurrent += 47;
 	} else if (totalShareCount - totalShareCurrent > 10) {
@@ -37,7 +36,6 @@ function animateShareCount() {
 		totalShareCurrent++;
 	}
 	if (totalShareCurrent === totalShareCount) {
-		console.log('I should stop now');
 		clearInterval(animateShareCountInterval);
 	}
 	document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
@@ -45,7 +43,6 @@ function animateShareCount() {
 
 function getShares(data) {
 	totalShareCount += data.shares ? data.shares : data.count;
-	console.log('total: ' + totalShareCount);
 	if (animateShareCountInterval === null) {
 		animateShareCountInterval = setInterval(animateShareCount, 50);
 	}
