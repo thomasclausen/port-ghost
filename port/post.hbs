@@ -52,7 +52,7 @@
 		} else {
 			totalShareCount += data.count;
 		}
-		if (animateShareCountInterval === null) {
+		if (animateShareCountInterval === null && totalShareCount > 0) {
 			animateShareCountInterval = setInterval(animateShareCount, 50);
 		}
 	}
