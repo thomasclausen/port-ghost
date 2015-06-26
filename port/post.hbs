@@ -20,35 +20,35 @@
 			{{/prev_post}}
 		</ul>
 	</nav>
+
+	<script>
+	var totalShareCount = 0,
+		totalShareCurrent = 0,
+		animateShareCountInterval = null;
+
+	function animateShareCount() {
+		if (totalShareCount - totalShareCurrent > 50) {
+			totalShareCurrent += 47;
+		} else if (totalShareCount - totalShareCurrent > 10) {
+			totalShareCurrent += 7;
+		} else {
+			totalShareCurrent++;
+		}
+		if (totalShareCurrent === totalShareCount) {
+			clearInterval(animateShareCountInterval);
+		}
+		document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
+	}
+
+	function getShares(data) {
+		totalShareCount += data.shares ? data.shares : data.count;
+		if (animateShareCountInterval === null) {
+			animateShareCountInterval = setInterval(animateShareCount, 50);
+		}
+	}
+	</script>
+	<script src="https://graph.facebook.com/?id={{url absolute="true"}}&callback=getShares" async></script>
+	<script src="https://cdn.api.twitter.com/1/urls/count.json?url={{url absolute="true"}}&callback=getShares" async></script>
+	<script src="https://api.pinterest.com/v1/urls/count.json?url={{url absolute="true"}}&callback=getShares" async></script>
+	<script src="https://www.linkedin.com/countserv/count/share?url={{url absolute="true"}}&callback=getShares" async></script>
 {{/post}}
-
-<script>
-var totalShareCount = 0,
-	totalShareCurrent = 0,
-	animateShareCountInterval = null;
-
-function animateShareCount() {
-	if (totalShareCount - totalShareCurrent > 50) {
-		totalShareCurrent += 47;
-	} else if (totalShareCount - totalShareCurrent > 10) {
-		totalShareCurrent += 7;
-	} else {
-		totalShareCurrent++;
-	}
-	if (totalShareCurrent === totalShareCount) {
-		clearInterval(animateShareCountInterval);
-	}
-	document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
-}
-
-function getShares(data) {
-	totalShareCount += data.shares ? data.shares : data.count;
-	if (animateShareCountInterval === null) {
-		animateShareCountInterval = setInterval(animateShareCount, 50);
-	}
-}
-</script>
-<script src="https://graph.facebook.com/?id=https://squareup.com/townsquare/how-to-use-social-media-to-market-your-online-store/&callback=getShares" async></script>
-<script src="https://cdn.api.twitter.com/1/urls/count.json?url=https://squareup.com/townsquare/how-to-use-social-media-to-market-your-online-store/&callback=getShares" async></script>
-<script src="https://api.pinterest.com/v1/urls/count.json?url=https://squareup.com/townsquare/how-to-use-social-media-to-market-your-online-store/&callback=getShares" async></script>
-<script src="https://www.linkedin.com/countserv/count/share?url=https://squareup.com/townsquare/how-to-use-social-media-to-market-your-online-store/&callback=getShares" async></script>
