@@ -5,21 +5,20 @@
 (function () {
 	'use strict';
 
-	var documentState = null,
-		body = document.body,
+	var body = document.body,
 		iframes = document.getElementsByTagName('iframe');
 
-	function poorMansDebugging(string) {
+	var poorMansDebugging = function (string) {
 		if (window.console) {
 			console.log(string);
 		}
-	}
+	};
 
-	function init() {
+	var init = function () {
 		// Do something
-	}
+	};
 
-	documentState = setInterval(function () {
+	var documentState = setInterval(function () {
 		poorMansDebugging('documentState: ' + document.readyState);
 		if (document.readyState === 'complete') {
 			clearInterval(documentState);
