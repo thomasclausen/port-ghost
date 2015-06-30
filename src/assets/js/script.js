@@ -6,15 +6,16 @@
 	'use strict';
 
 	var body = document.body,
-		iframes = document.getElementsByTagName('iframe');
+		iframes = document.getElementsByTagName('iframe'),
+		no_iframes = iframes.length;
 
-	var poorMansDebugging = function (string) {
+	function poorMansDebugging(string) {
 		if (window.console) {
 			console.log(string);
 		}
 	};
 
-	var init = function () {
+	function init() {
 		// Do something
 	};
 
@@ -26,8 +27,8 @@
 		}
 	}, 100);
 
-	if (iframes.length !== 0) {
-		for (var i = 0; i < iframes.length; i++) {
+	if (no_iframes !== 0) {
+		for (var i = 0; i < no_iframes; i++) {
 			var iframe = iframes[i],
 				ratio = '';
 
