@@ -11,7 +11,7 @@
 			'iframe[src*="player.vimeo.com"]',
 			'iframe[src*="youtube.com"]',
 			'iframe[src*="youtube-nocookie.com"]',
-			'iframe[src*="kickstarter.com"][src*="video.html"]',
+			'iframe[src*="kickstarter.com"][src$="video.html"]',
 			'iframe[src*="blip.tv"]',
 			'iframe[src*="slideshare.net"]',
 			'iframe[src*="ted.com"]',
@@ -19,9 +19,11 @@
 			'iframe[src*="dailymotion.com"]',
 			'iframe[src*="flickr.com"]',
 			'iframe[src*="hulu.com"]',
-			'embed[src*="wordpress.com"]'
+			'embed[src*="wordpress.com"]',
+			'iframe[src*="issuu.com"]'
 		],
-		embeds = document.querySelectorAll(embedSelectors.join(','));
+		embeds = document.querySelectorAll(embedSelectors.join(',')),
+		embedsLength = embeds.length;
 
 	function poorMansDebugging(string) {
 		if (window.console) {
@@ -41,16 +43,18 @@
 		}
 	}, 100);
 
-	if (embeds.length !== 0) {
-		for (var i = 0; i < embeds.length; i++) {
+	if (embedsLength !== 0) {
+		for (var i = 0; i < embedsLength; i++) {
 			var embed = embeds[i],
+				embedWidth = embed.getAttribute('width'),
+				embedHeight = embed.getAttribute('height'),
 				ratio = 56.25;
 
-			if (embed.getAttribute('width') !== null && embed.getAttribute('height') !== null) {
-				if (embed.getAttribute('width') > embed.getAttribute('height')) {
-					ratio = (embed.getAttribute('height') / embed.getAttribute('width')) * 100;
+			if (embedWidth !== null && embedHeight !== null) {
+				if (embedWidth > embedHeight) {
+					ratio = (embedHeight / embedWidth) * 100;
 				} else {
-					ratio = (embed.getAttribute('width') / embed.getAttribute('height')) * 100;
+					ratio = (embedWidth / embedHeight) * 100;
 				}
 			}
 
