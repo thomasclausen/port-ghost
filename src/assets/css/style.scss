@@ -67,24 +67,32 @@ h3,
 h4 {
 	font-weight: 700;
 	line-height: 1em;
-	margin-top: 0;
-	margin-bottom: 0;
 }
 h1 {
 	font-size: 2.4rem;
+	margin-top: 1.333em;
+	margin-bottom: 1.333em;
 
 	@media (min-width: 48em) {
 		font-size: 4rem;
+		margin-top: 0.8em;
+		margin-bottom: 0.8em;
 	}
 }
 h2 {
 	font-size: 2rem;
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
 }
 h3 {
 	font-size: 1.6rem;
+	margin-top: 2em;
+	margin-bottom: 2em;
 }
 h4 {
 	font-size: 1.4em;
+	margin-top: 2.286em;
+	margin-bottom: 2.286em;
 }
 p {
 	margin-top: 2em;
@@ -168,11 +176,6 @@ mark {
 }
 del {
 	white-space: pre-wrap;
-}
-
-iframe {
-	margin-top: 2em;
-	margin-bottom: 2em;
 }
 
 /* ==========================================================================
@@ -545,15 +548,9 @@ iframe {
 	embed {
 		width: 100%;
 		height: 100%;
-		margin-top: 0;
-		margin-bottom: 0;
 		position: absolute;
 		top: 0;
 		left: 0;
-	}
-
-	+ iframe {
-		margin-top: 0;
 	}
 }
 
@@ -675,4 +672,8 @@ iframe {
 			font-weight: normal;
 		}
 	}
+}
+.instagram-media-rendered {
+	margin-top: 2em !important;
+	margin-bottom: 2em !important;
 }
