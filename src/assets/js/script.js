@@ -5,9 +5,10 @@
 (function () {
 	'use strict';
 
-	var body = document.body,
+	var documentState = null,
+		body = document.body,
 		iframes = document.getElementsByTagName('iframe'),
-		no_iframes = iframes.length;
+		iframesLength = iframes.length;
 
 	function poorMansDebugging(string) {
 		if (window.console) {
@@ -19,7 +20,7 @@
 		// Do something
 	};
 
-	var documentState = setInterval(function () {
+	documentState = setInterval(function () {
 		poorMansDebugging('documentState: ' + document.readyState);
 		if (document.readyState === 'complete') {
 			clearInterval(documentState);
@@ -27,8 +28,8 @@
 		}
 	}, 100);
 
-	if (no_iframes !== 0) {
-		for (var i = 0; i < no_iframes; i++) {
+	if (iframesLength !== 0) {
+		for (var i = 0; i < iframesLength; i++) {
 			var iframe = iframes[i],
 				ratio = '';
 
