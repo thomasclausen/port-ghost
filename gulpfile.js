@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     path = require('path'),
+    fs = require('fs'),
     clean = require('gulp-clean'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
@@ -120,18 +121,57 @@ gulp.task('copy', function() {
 });
 
 gulp.task('replace', function() {
-  return gulp.src(paths.default)
-    .pipe(htmlreplace({
-      css: {
-        src: '{{asset "css/' + pkg.name + '.min.css"}}',
-        tpl: '<link rel="stylesheet" id="' + pkg.name + '-css" href="%s" />'
-      },
-      js: {
-        src: '{{asset "js/' + pkg.name + '.min.js"}}',
-        tpl: '<script src="%s" async></script>'
-      }
-    }))
-    .pipe(gulp.dest(pkg.name));
+  fs.stat(pkg.name + '/assets/css/' + pkg.name + '.min.css', function (err, stats) {
+    var CSSFileSize = stats.size;
+
+    if (CSSFileSize < 5000) {
+      console.log('CSS is less then 5 kb (' + CSSFileSize + ') = embed');
+    } else {
+      console.log('CSS is larger then 5 kb (' + CSSFileSize + ') != embed');
+    }
+    if (CSSFileSize != 0 && CSSFileSize < 5000) {
+      // INLINE
+    } else {
+      gulp.src(paths.default)
+        .pipe(htmlreplace({
+          css: {
+            src: '{{asset "css/' + pkg.name + '.min.css"}}',
+            tpl: '<link rel="stylesheet" id="' + pkg.name + '-css" href="%s" />'
+          },
+          js: {
+            src: '{{asset "js/' + pkg.name + '.min.js"}}',
+            tpl: '<script src="%s" async></script>'
+          }
+        }))
+        .pipe(gulp.dest(pkg.name));
+    }
+  });
+
+  fs.stat(pkg.name + '/assets/js/' + pkg.name + '.min.js', function (err, stats) {
+    var JSFileSize = stats.size;
+
+    if (JSFileSize < 5000) {
+      console.log('JS is less then 5 kb (' + JSFileSize + ') = embed');
+    } else {
+      console.log('JS is larger then 5 kb (' + JSFileSize + ') != embed');
+    }
+    if (JSFileSize != 0 && JSFileSize < 5000) {
+      // INLINE
+    } else {
+      gulp.src(paths.default)
+        .pipe(htmlreplace({
+          css: {
+            src: '{{asset "css/' + pkg.name + '.min.css"}}',
+            tpl: '<link rel="stylesheet" id="' + pkg.name + '-css" href="%s" />'
+          },
+          js: {
+            src: '{{asset "js/' + pkg.name + '.min.js"}}',
+            tpl: '<script src="%s" async></script>'
+          }
+        }))
+        .pipe(gulp.dest(pkg.name));
+    }
+  });
 });
 
 gulp.task('watch', function() {
