@@ -603,6 +603,18 @@ del {
 	}
 }
 
+#disqus_thread {
+	max-width: 760px;
+	padding: 0.5em 1em 0em 1em;
+	background: $grey-dark;
+	@include border-radius;
+	margin: 2em auto;
+
+	@media (min-width: 40em) {
+		padding: 1.5em 2em 1em 2em;
+	}
+}
+
 /* ==========================================================================
 	 4. Footer
 	 ========================================================================== */
