@@ -9,6 +9,17 @@
 		</div>
 	</article>
 
+	<nav class="post-pagination" role="navigation">
+		<ul>
+			{{#next_post}}
+				<li class="next"><a href="{{url}}" title="{{title}}" rel="next"><span>Next post:</span><br />&larr; {{title}}</a></li>
+			{{/next_post}}
+			{{#prev_post}}
+				<li class="prev"><a href="{{url}}" title="{{title}}" rel="prev"><span>Previous post:</span><br />{{title}} &rarr;</a></li>
+			{{/prev_post}}
+		</ul>
+	</nav>
+
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 	var disqus_shortname = 'thomasclausen',
@@ -24,15 +35,4 @@
 	})();
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-	<nav class="post-pagination" role="navigation">
-		<ul>
-			{{#next_post}}
-				<li class="next"><a href="{{url}}" title="{{title}}" rel="next"><span>Next post:</span><br />&larr; {{title}}</a></li>
-			{{/next_post}}
-			{{#prev_post}}
-				<li class="prev"><a href="{{url}}" title="{{title}}" rel="prev"><span>Previous post:</span><br />{{title}} &rarr;</a></li>
-			{{/prev_post}}
-		</ul>
-	</nav>
 {{/post}}
