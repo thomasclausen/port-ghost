@@ -130,7 +130,7 @@ gulp.task('replace', function() {
       },
       js: {
         src: '{{asset "js/' + pkg.name + '.min.js"}}',
-        tpl: '<script type="text/javascript" src="%s" async></script>'
+        tpl: '<script src="%s" async></script>'
       }
     }))
     .pipe(gulp.dest(pkg.name));
