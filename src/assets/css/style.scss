@@ -347,13 +347,10 @@ button {
 }
 
 .post {
-	max-width: 960px;
+	max-width: 60em;
+	text-align: center;
 	margin-right: auto;
 	margin-left: auto;
-
-	@media (min-width: 48em) {
-		text-align: center;
-	}
 
 	&.page {
 		text-align: left;
@@ -404,7 +401,7 @@ button {
 		h1,
 		p,
 		hr {
-			max-width: 760px;
+			max-width: 47.5em;
 			margin-right: auto;
 			margin-left: auto;
 		}
@@ -435,7 +432,7 @@ button {
 	.page-content,
 	.error-content,
 	.private-content {
-		max-width: 760px;
+		max-width: 47.5em;
 		margin-right: auto;
 		margin-left: auto;
 	}
@@ -445,6 +442,20 @@ button {
 			width: 100%;
 			margin-top: 0.25em;
 			margin-bottom: 0.25em;
+		}
+
+		.caption {
+			text-align: left;
+			padding-right: 10%;
+			padding-left: 30%;
+			margin-top: 0.5em;
+			margin-bottom: 1.5em;
+			opacity: 0.5;
+			text-indent: -1em;
+
+			&:before {
+				content: '\2191\2002';
+			}
 		}
 	}
 	.private-error {
@@ -576,7 +587,7 @@ button {
 	}
 }
 
-.post-pagination {
+.post-navigation {
 	padding-top: 3em;
 	border-top: 1px solid $grey-light;
 	margin-top: 2em;
@@ -640,7 +651,7 @@ button {
 }
 
 .footnotes {
-	max-width: 760px;
+	max-width: 50.858em;
 	font-size: 1.4rem;
 	text-align: left;
 	padding-right: 1.5em;

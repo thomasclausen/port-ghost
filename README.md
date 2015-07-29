@@ -22,9 +22,47 @@ Setting up your blog with this theme is done in four easy steps no matter if you
 
 That's all... enjoy!
 
+## Simple customization
+
+With Ghost it's possible to insert code into the top and bottom of your blog without editing any theme files.
+This is really handy if you wan't to insert custom styling, Google Analytics' tracking code or custom meta tags.
+
+**Custom styling**
+```html
+<style>
+body {
+  background-color: #f0f0f0;
+}
+</style>
+```
+
+**Custom meta tags**
+```html
+<meta name="twitter:site" content="@thomasclausendk" />
+<meta name="twitter:creator" content="@thomasclausendk" />
+
+<meta property="article:publisher" content="https://www.facebook.com/thomasclausen.dk" />
+<meta property="article:author" content="https://www.facebook.com/thomasclausen.dk" />
+
+<link rel="publisher" href="https://plus.google.com/+ThomasClausenDK" />
+<link rel="author" href="https://plus.google.com/+ThomasClausenDK" />
+```
+
+**Google Analytics**
+```html
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXX-X', 'yourblog.ghost.io');
+ga('send', 'pageview');
+</script>
+```
+
+On the Ghost support pages there's a [easy step-by-step guide to Code Injection](http://support.ghost.org/use-code-injection/).
+
 ## Feedback
 
-Found a bug? Please [create an issue](https://github.com/thomasclausen/port-ghost/issues) on GitHub, and I'll do my best to fix it.
+Found a bug? Please [create an issue](https://github.com/thomasclausen/port-ghost/issues) on GitHub, and I'll do my best to fix it, or if you have a bugfix ready, a pull-request are more then welcome.
 
 Also feel free to [create an issue](https://github.com/thomasclausen/port-ghost/issues) if you have a great idea for an improvement or think there's a feature missing.
 
