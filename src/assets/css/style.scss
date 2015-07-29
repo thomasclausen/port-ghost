@@ -124,6 +124,7 @@ img {
 	vertical-align: bottom;
 }
 blockquote {
+	font-size: 2rem;
 	color: $primary-color;
 	margin: 2em 0;
 	padding: 0.25em 0 0.25em 1.5em;
@@ -138,6 +139,7 @@ blockquote {
 		font-style: italic;
 	}
 	cite {
+		font-size: 1.6rem;
 		font-weight: bold;
 	}
 }
