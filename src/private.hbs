@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<title>{{meta_title}}</title>
+<meta name="description" content="{{meta_description}}" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" id="google-font-css" href="//fonts.googleapis.com/css?family=Lato:400,700,400italic" />
+<!-- build:css -->
+<link rel="stylesheet" id="normalize-css" href="{{asset "css/normalize.css"}}" />
+<link rel="stylesheet" id="port-css" href="{{asset "css/style.css"}}" />
+<!-- endbuild -->
+</head>
+
+<body class="{{body_class}}">
+<div class="wrap">
+	<div class="site-content" role="main">
+		<article id="private" class="{{post_class}}" role="article">
+			<div class="private-image">
+				<span>&times;</span>
+			</div>
+			<div class="private-content">
+				<h1 class="private-title">SORRY, this blog is private!</h2>
+				{{#if error}}
+					<p class="login-error">{{error.message}}</p>
+				{{/if}}
+				<form method="post" id="setup" novalidate="novalidate">
+					<fieldset>
+						<input type="password" name="password" placeholder="Password" />
+						<button type="submit">Let me in!</button>
+					</fieldset>
+				</form>
+			</div>
+		</article>
+	</div>
+</div>
+
+<!-- build:js -->
+<script type="text/javascript" src="{{asset "js/classie.js"}}"></script>
+<script type="text/javascript" src="{{asset "js/script.js"}}"></script>
+<!-- endbuild -->
+
+{{ghost_foot}}
+</body>
+
+</html>

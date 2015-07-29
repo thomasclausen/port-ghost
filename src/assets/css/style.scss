@@ -11,9 +11,10 @@
 
 	 0.  SASS
 	 1.  Typography
-	 2.  Header
-	 3.  Content Styles
-	 4.  Footer
+	 2.  Form
+	 3.  Header
+	 4.  Content Styles
+	 5.  Footer
 
  */
 
@@ -25,6 +26,8 @@ $primary-font-stack: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $primary-color: #25292c;
 $secondary-color: #4ac2be;
+
+$error-color: #f55045;
 
 $white: #fff;
 $grey-light: #efefef;
@@ -184,7 +187,58 @@ del {
 }
 
 /* ==========================================================================
-	 2. Header
+	 2. Form
+	 ========================================================================== */
+
+form {
+	max-width: 30em;
+
+	@media (min-width: 48em) {
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+fieldset {
+	padding: 0 8em 0 0;
+	border: none;
+	margin: 2em 0;
+	position: relative;
+
+	@media (min-width: 48em) {
+		padding-right: 11em;
+	}
+}
+
+input {
+	width: 100%;
+	color: $grey-medium;
+	padding: 1em;
+	background: none;
+	border: none;
+	border-bottom: 1px solid $grey-medium;
+	@include border-radius(0);
+}
+
+button {
+	width: 7em;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: $white;
+	padding: 1em 0;
+	background: $secondary-color;
+	border: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	@media (min-width: 48em) {
+		width: 10em;
+	}
+}
+
+/* ==========================================================================
+	 3. Header
 	 ========================================================================== */
 
 .site-header {
@@ -266,7 +320,7 @@ del {
 }
 
 /* ==========================================================================
-	 3. Content Styles
+	 4. Content Styles
 	 ========================================================================== */
 
 .wrap {
@@ -280,6 +334,16 @@ del {
 .site-content {
 	padding-right: 5%;
 	padding-left: 5%;
+
+	.private-template & {
+		padding-top: 3em;
+		padding-bottom: 3em;
+
+		@media (min-width: 48em) {
+			padding-top: 6em;
+			padding-bottom: 6em;
+		}
+	}
 }
 
 .post {
@@ -310,7 +374,8 @@ del {
 			@include border-radius(50%);
 		}
 	}
-	.error-image {
+	.error-image,
+	.private-image {
 		width: 15em;
 		height: 14em;
 		margin: 0 auto 2em auto;
@@ -365,7 +430,8 @@ del {
 		}
 	}
 	.page-content,
-	.error-content {
+	.error-content,
+	.private-content {
 		max-width: 47.5em;
 		margin-right: auto;
 		margin-left: auto;
@@ -391,6 +457,14 @@ del {
 				content: '\2191\2002';
 			}
 		}
+	}
+	.private-error {
+		font-weight: 700;
+		color: $white;
+		padding: 1em 2.5em;
+		background: $error-color;
+		margin-bottom: 0;
+		display: inline-block;
 	}
 }
 
@@ -604,7 +678,7 @@ del {
 }
 
 /* ==========================================================================
-	 4. Footer
+	 5. Footer
 	 ========================================================================== */
 
 .site-footer {
