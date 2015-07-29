@@ -449,7 +449,11 @@ button {
 	}
 	.private-error {
 		font-weight: 700;
-		color: $error-color;
+		color: $white;
+		padding: 1em 2.5em;
+		background: $error-color;
+		margin-bottom: 0;
+		display: inline-block;
 	}
 }
 
