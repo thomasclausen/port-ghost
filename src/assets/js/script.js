@@ -9,7 +9,7 @@
 		body = document.body,
 		iframes = document.getElementsByTagName('iframe'),
 		iframesLength = iframes.length,
-		textOptions = document.querySelector('.text-options'),
+		shareOptions = document.querySelector('.share-options'),
 		lastType = null;
 
 	function poorMansDebugging(string) {
@@ -63,20 +63,20 @@
 			range = selection.getRangeAt(0),
 			boundary = range.getBoundingClientRect();
 
-		textOptions.style.top = boundary.top - 5 + window.pageYOffset + 'px';
-		textOptions.style.left = (boundary.left + boundary.right) / 2 + 'px';
+		shareOptions.style.top = boundary.top - 5 + window.pageYOffset + 'px';
+		shareOptions.style.left = (boundary.left + boundary.right) / 2 + 'px';
 	};
 	function checkTextHighlighting(event) {
 		var selection = window.getSelection();
 
 		if (selection.isCollapsed === true) {
-			classie.removeClass(textOptions, 'js-show');
+			classie.removeClass(shareOptions, 'js-show');
 		} else {
 			var currentNodeList = findNodes(selection.focusNode);
 
 			if (hasNode(currentNodeList, 'ARTICLE')) {
 				updateBubblePosition();
-				classie.addClass(textOptions, 'js-show');
+				classie.addClass(shareOptions, 'js-show');
 			}
 		}
 
@@ -86,4 +86,30 @@
 		setTimeout(checkTextHighlighting, 1);
 	});
 	document.addEventListener('onresize', updateBubblePosition);
+
+	function shareHighlightedText() {
+		var selection = window.getSelection();
+
+		if (selection.isCollapsed === false) {
+			var shareNetwork = this.getAttribute('data-action'),
+				shareUrl = location.href,
+				shareUser = 'thomasclausendk',
+				shareContent = selection.toString(),
+				shareCount = 140 - (6 + shareUrl.length + 6 + shareUser.length);
+
+			if (shareNetwork === 'twitter') {
+				if (shareContent.length > shareCount) {
+					shareContent = shareContent.substring(0, shareCount) + '...';
+				}
+				window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&via=' + encodeURIComponent(shareUser) + '&text=' + encodeURIComponent(shareContent) + ' —&original_referer=' + encodeURIComponent(shareUrl), shareNetwork, 'width=550,height=450');
+			}
+			if (shareNetwork === 'facebook') {
+				window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), shareNetwork, 'width=550,height=450');
+			}
+			if (shareNetwork === 'google') {
+				window.open('https://plus.google.com/share?url=' + encodeURIComponent(shareUrl), shareNetwork, 'width=550,height=450');
+			}
+		}
+	};
+	shareOptions.querySelector('button').addEventListener('click', shareHighlightedText);
 })();
