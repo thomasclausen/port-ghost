@@ -680,35 +680,36 @@ button {
 	}
 }
 
-.text-options {
+.share-options {
 	width: 0;
 	height: 0;
-	margin-top: 5px;
+	margin-top: 10px;
 	opacity: 0;
 	position: absolute;
 	left: 0;
 	top: 0;
 	z-index: -1;
 	visibility: hidden;
-	transition: opacity 0.15s, z-index 0s 0.15s, visibility 0s 0.15s;
+	transition: margin-top 0.15s, opacity 0.15s, z-index 0s 0.15s, visibility 0s 0.15s;
 
 	&.js-show {
+		margin-top: 5px;
 		opacity: 1;
 		z-index: 2;
 		visibility: visible;
-		transition: opacity 0.25s, z-index 0s, visibility 0s;
+		transition: margin-top 0.15s, opacity 0.25s, z-index 0s, visibility 0s;
 	}
 
 	.options {
 		width: 124px;
-		height: 40px;
+		height: 44px;
 		color: $white;
 		text-align: center;
-		padding: 5px;
+		padding: 4px;
 		background-color: rgba($black,0.9);
-		border-radius: 5px;
+		@include border-radius;
 		margin-left: -62px;
-		margin-top: -46px;
+		margin-top: -50px;
 		position: absolute;
 		z-index: 1000;
 
@@ -722,6 +723,25 @@ button {
 			top: 100%;
 			left: 50%;
 			content: '';
+		}
+
+		button {
+			width: 36px;
+			height: 36px;
+			line-height: 36px;
+			padding-top: 0;
+			padding-bottom: 0;
+			position: static;
+
+			&[data-action=twitter] {
+				background-color: #55acee;
+			}
+			&[data-action=facebook] {
+				background-color: #3b5998;
+			}
+			&[data-action=google] {
+				background-color: #dd4b39;
+			}
 		}
 	}
 }
