@@ -63,7 +63,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.images, ['images']);
 });
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
   gulp.start('styles', 'scripts', 'images');
 });
 
