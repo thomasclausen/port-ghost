@@ -460,6 +460,41 @@ button {
 				content: '\2191\2002';
 			}
 		}
+		.browser {
+			padding: 14px 12px;
+			background: #243638;
+			border-radius: 4px 4px 0 0;
+			margin-top: 0.25em;
+			margin-bottom: -0.25em;
+
+			&:before,
+			&:after {
+				content: '';
+				display: table;
+			}
+			&:after {
+				clear: both;
+			}
+
+			.button {
+				width: 8px;
+				height: 8px;
+				background: #999;
+				border-radius: 4px;
+				margin-right: 6px;
+				float: left;
+
+				&.red {
+					background: #e74c3c;
+				}
+				&.yellow {
+					background: #f1c40f;
+				}
+				&.green {
+					background: #2ecc71;
+				}
+			}
+		}
 	}
 	.private-error {
 		font-weight: 700;
