@@ -65,8 +65,8 @@
 
 		shareOptions.style.top = boundary.top - 5 + window.pageYOffset + 'px';
 		shareOptions.style.left = (boundary.left + boundary.right) / 2 + 'px';
-	};
-	function checkTextHighlighting(event) {
+	}
+	function checkTextHighlighting() {
 		var selection = window.getSelection();
 
 		if (selection.isCollapsed === true) {
@@ -81,13 +81,13 @@
 		}
 
 		lastType = selection.isCollapsed;
-	};
+	}
 	document.addEventListener('mouseup', function () {
 		setTimeout(checkTextHighlighting, 1);
 	});
 	document.addEventListener('onresize', updateBubblePosition);
 
-	function shareHighlightedText() {
+	var shareHighlightedText = function () {
 		var selection = window.getSelection();
 
 		if (selection.isCollapsed === false) {
