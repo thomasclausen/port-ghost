@@ -11,9 +11,10 @@
 
 	 0.  SASS
 	 1.  Typography
-	 2.  Header
-	 3.  Content Styles
-	 4.  Footer
+	 2.  Form
+	 3.  Header
+	 4.  Content Styles
+	 5.  Footer
 
  */
 
@@ -26,6 +27,8 @@ $primary-font-stack: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $primary-color: #25292c;
 $secondary-color: #4ac2be;
 
+$error-color: #f55045;
+
 $white: #fff;
 $grey-light: #efefef;
 $grey-medium: #878788;
@@ -34,6 +37,24 @@ $black: #000;
 
 @mixin border-radius($radius: 3px) {
 	border-radius: $radius;
+};
+
+%reset-list {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+%clearfix {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 }
 
 /* ==========================================================================
@@ -121,6 +142,8 @@ img {
 	vertical-align: bottom;
 }
 blockquote {
+	font-size: 2rem;
+	line-height: 1.4em;
 	color: $primary-color;
 	margin: 2em 0;
 	padding: 0.25em 0 0.25em 1.5em;
@@ -135,6 +158,7 @@ blockquote {
 		font-style: italic;
 	}
 	cite {
+		font-size: 1.6rem;
 		font-weight: bold;
 	}
 }
@@ -190,20 +214,64 @@ video {
 }
 
 /* ==========================================================================
-	 2. Header
+	 2. Form
+	 ========================================================================== */
+
+form {
+	max-width: 30em;
+
+	@media (min-width: 48em) {
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+fieldset {
+	padding: 0 8em 0 0;
+	border: none;
+	margin: 2em 0;
+	position: relative;
+
+	@media (min-width: 48em) {
+		padding-right: 11em;
+	}
+}
+
+input {
+	width: 100%;
+	color: $grey-medium;
+	padding: 1em;
+	background: none;
+	border: none;
+	border-bottom: 1px solid $grey-medium;
+	@include border-radius(0);
+}
+
+button {
+	width: 7em;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: $white;
+	padding: 1em 0;
+	background: $secondary-color;
+	border: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	@media (min-width: 48em) {
+		width: 10em;
+	}
+}
+
+/* ==========================================================================
+	 3. Header
 	 ========================================================================== */
 
 .site-header {
 	padding: 2em 5% 4em 5%;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	.site-logo {
 		font-size: 2.8rem;
@@ -239,10 +307,7 @@ video {
 		}
 
 		ul {
-			list-style: none;
-			padding-left: 0;
-			margin-top: 0;
-			margin-bottom: 0;
+			@extend %reset-list;
 
 			li {
 				margin-left: 18px;
@@ -272,7 +337,7 @@ video {
 }
 
 /* ==========================================================================
-	 3. Content Styles
+	 4. Content Styles
 	 ========================================================================== */
 
 .wrap {
@@ -286,6 +351,16 @@ video {
 .site-content {
 	padding-right: 5%;
 	padding-left: 5%;
+
+	.private-template & {
+		padding-top: 3em;
+		padding-bottom: 3em;
+
+		@media (min-width: 48em) {
+			padding-top: 6em;
+			padding-bottom: 6em;
+		}
+	}
 }
 
 .post {
@@ -316,7 +391,8 @@ video {
 			@include border-radius(50%);
 		}
 	}
-	.error-image {
+	.error-image,
+	.private-image {
 		width: 15em;
 		height: 14em;
 		margin: 0 auto 2em auto;
@@ -371,7 +447,8 @@ video {
 		}
 	}
 	.page-content,
-	.error-content {
+	.error-content,
+	.private-content {
 		max-width: 47.5em;
 		margin-right: auto;
 		margin-left: auto;
@@ -397,6 +474,42 @@ video {
 				content: '\2191\2002';
 			}
 		}
+		.browser {
+			padding: 14px 12px;
+			background: #243638;
+			border-radius: 4px 4px 0 0;
+			margin-top: 0.25em;
+			margin-bottom: -0.25em;
+
+			@extend %clearfix;
+
+			.button {
+				width: 8px;
+				height: 8px;
+				background: #999;
+				border-radius: 4px;
+				margin-right: 6px;
+				float: left;
+
+				&.red {
+					background: #e74c3c;
+				}
+				&.yellow {
+					background: #f1c40f;
+				}
+				&.green {
+					background: #2ecc71;
+				}
+			}
+		}
+	}
+	.private-error {
+		font-weight: 700;
+		color: $white;
+		padding: 1em 2.5em;
+		background: $error-color;
+		margin-bottom: 0;
+		display: inline-block;
 	}
 }
 
@@ -405,14 +518,7 @@ video {
 	margin-left: -1em;
 	clear: both;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	.post {
 		padding: 1em;
@@ -481,20 +587,10 @@ video {
 .site-pagination {
 	margin-top: 2em;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	ul {
-		list-style: none;
-		padding-left: 0;
-		margin-top: 0;
-		margin-bottom: 0;
+		@extend %reset-list;
 
 		li {
 			width: 50%;
@@ -519,25 +615,15 @@ video {
 	}
 }
 
-.post-pagination {
+.post-navigation {
 	padding-top: 3em;
 	border-top: 1px solid $grey-light;
 	margin-top: 2em;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	ul {
-		list-style: none;
-		padding-left: 0;
-		margin-top: 0;
-		margin-bottom: 0;
+		@extend %reset-list;
 
 		li {
 			width: 50%;
@@ -583,7 +669,7 @@ video {
 }
 
 .footnotes {
-	max-width: 47.5em;
+	max-width: 50.858em;
 	font-size: 1.4rem;
 	text-align: left;
 	padding-right: 1.5em;
@@ -610,7 +696,7 @@ video {
 }
 
 /* ==========================================================================
-	 4. Footer
+	 5. Footer
 	 ========================================================================== */
 
 .site-footer {
@@ -621,14 +707,7 @@ video {
 	margin-top: 4.8rem;
 	position: relative;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	a {
 		color: $grey-medium;
