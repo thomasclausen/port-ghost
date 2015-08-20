@@ -38,14 +38,14 @@
 			clearInterval(animateShareCountInterval);
 		}
 		document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
-	}
+	};
 
 	var getShares = function (data) {
 		totalShareCount += data.shares ? data.shares : data.count;
 		if (animateShareCountInterval === null && totalShareCount > 0) {
 			animateShareCountInterval = setInterval(animateShareCount, 50);
 		}
-	}
+	};
 	</script>
 	<script src="https://graph.facebook.com/?id={{url absolute="true"}}&callback=getShares" async></script>
 	<script src="https://cdn.api.twitter.com/1/urls/count.json?url={{url absolute="true"}}&callback=getShares" async></script>
