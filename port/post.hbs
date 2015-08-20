@@ -10,7 +10,7 @@
 		<div class="total-share-count" data-total-share-url="{{url absolute="true"}}">Shares: <span class="total-count">0</span></div>
 	</article>
 
-	<nav class="post-pagination" role="navigation">
+	<nav class="post-navigation" role="navigation">
 		<ul>
 			{{#next_post}}
 				<li class="next"><a href="{{url}}" title="{{title}}" rel="next"><span>Next post:</span><br />&larr; {{title}}</a></li>
@@ -38,7 +38,7 @@
 			clearInterval(animateShareCountInterval);
 		}
 		document.querySelector('.total-share-count .total-count').innerHTML = totalShareCurrent;
-	}
+	};
 
 	var getShares = function (data) {
 		if (document.currentScript.id === 'stumbleupon') {
@@ -55,7 +55,7 @@
 		if (animateShareCountInterval === null && totalShareCount > 0) {
 			animateShareCountInterval = setInterval(animateShareCount, 50);
 		}
-	}
+	};
 
 	var getGooglePlusShareCount1 = function () {
 		var params = {
@@ -79,7 +79,7 @@
 				return animateShareCount($('.total-count', el), totalShareCount);
 			}
 		});
-	}
+	};
 
 	var getGooglePlusShareCount = function () {
 		gapi.client.setApiKey('AIzaSyDmKyurdBd-EShTXmj2R3q-JsZQBV7ZHak');
@@ -101,7 +101,7 @@
 				console.log('Error: ' + reason.result.error.message);
 			});
 		});
-	}
+	};
 	</script>
 	<script src="https://graph.facebook.com/?id={{url absolute="true"}}&callback=getShares" async></script>
 	<script src="https://cdn.api.twitter.com/1/urls/count.json?url={{url absolute="true"}}&callback=getShares" async></script>

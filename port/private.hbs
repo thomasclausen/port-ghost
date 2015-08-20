@@ -10,23 +10,29 @@
 
 <link rel="stylesheet" id="google-font-css" href="//fonts.googleapis.com/css?family=Lato:400,700,400italic" />
 <link rel="stylesheet" id="port-css" href="{{asset "css/port.min.css"}}" />
-
-{{ghost_head}}
 </head>
 
 <body class="{{body_class}}">
 <div class="wrap">
-	<header class="site-header" role="banner">
-		<div class="site-logo"><a href="{{@blog.url}}" title="{{@blog.title}}">{{@blog.title}}</a></div>
-		{{navigation}}
-	</header>
 	<div class="site-content" role="main">
-		{{{body}}}
+		<article id="private" class="{{post_class}}" role="article">
+			<div class="private-image">
+				<span>&times;</span>
+			</div>
+			<div class="private-content">
+				<h1 class="private-title">SORRY, this blog is private!</h2>
+				{{#if error}}
+					<p class="login-error">{{error.message}}</p>
+				{{/if}}
+				<form method="post" id="setup" novalidate="novalidate">
+					<fieldset>
+						<input type="password" name="password" placeholder="Password" />
+						<button type="submit">Let me in!</button>
+					</fieldset>
+				</form>
+			</div>
+		</article>
 	</div>
-	<footer class="site-footer" role="contentinfo">
-		<div class="copyright">&copy; {{date format="YYYY"}} <a href="https://github.com/thomasclausen/port-ghost/" target="_blank">Port</a>. Proudly powered by <a href="https://ghost.org" target="_blank">Ghost</a>.</div>
-		<div class="credit">Theme by <a href="http://www.thomasclausen.dk" target="_blank">Thomas Clausen</a></div>
-	</footer>
 </div>
 
 <script src="{{asset "js/port.min.js"}}" async></script>
