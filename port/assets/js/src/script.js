@@ -14,11 +14,11 @@
 		if (window.console) {
 			console.log(string);
 		}
-	};
+	}
 
 	function init() {
 		// Do something
-	};
+	}
 
 	documentState = setInterval(function () {
 		poorMansDebugging('documentState: ' + document.readyState);
