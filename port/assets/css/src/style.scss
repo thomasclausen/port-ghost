@@ -37,6 +37,24 @@ $black: #000;
 
 @mixin border-radius($radius: 3px) {
 	border-radius: $radius;
+};
+
+%reset-list {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+%clearfix {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 }
 
 /* ==========================================================================
@@ -189,6 +207,12 @@ del {
 	white-space: pre-wrap;
 }
 
+video {
+	max-width: 100%;
+	height: auto;
+	vertical-align: bottom;
+}
+
 /* ==========================================================================
 	 2. Form
 	 ========================================================================== */
@@ -247,14 +271,7 @@ button {
 .site-header {
 	padding: 2em 5% 4em 5%;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	.site-logo {
 		font-size: 2.8rem;
@@ -290,10 +307,7 @@ button {
 		}
 
 		ul {
-			list-style: none;
-			padding-left: 0;
-			margin-top: 0;
-			margin-bottom: 0;
+			@extend %reset-list;
 
 			li {
 				margin-left: 18px;
@@ -460,6 +474,34 @@ button {
 				content: '\2191\2002';
 			}
 		}
+		.browser {
+			padding: 14px 12px;
+			background: #243638;
+			border-radius: 4px 4px 0 0;
+			margin-top: 0.25em;
+			margin-bottom: -0.25em;
+
+			@extend %clearfix;
+
+			.button {
+				width: 8px;
+				height: 8px;
+				background: #999;
+				border-radius: 4px;
+				margin-right: 6px;
+				float: left;
+
+				&.red {
+					background: #e74c3c;
+				}
+				&.yellow {
+					background: #f1c40f;
+				}
+				&.green {
+					background: #2ecc71;
+				}
+			}
+		}
 	}
 	.private-error {
 		font-weight: 700;
@@ -476,14 +518,7 @@ button {
 	margin-left: -1em;
 	clear: both;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	.post {
 		padding: 1em;
@@ -552,20 +587,10 @@ button {
 .site-pagination {
 	margin-top: 2em;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	ul {
-		list-style: none;
-		padding-left: 0;
-		margin-top: 0;
-		margin-bottom: 0;
+		@extend %reset-list;
 
 		li {
 			width: 50%;
@@ -595,20 +620,10 @@ button {
 	border-top: 1px solid $grey-light;
 	margin-top: 2em;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	ul {
-		list-style: none;
-		padding-left: 0;
-		margin-top: 0;
-		margin-bottom: 0;
+		@extend %reset-list;
 
 		li {
 			width: 50%;
@@ -758,14 +773,7 @@ button {
 	margin-top: 4.8rem;
 	position: relative;
 
-	&:before,
-	&:after {
-		content: '';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@extend %clearfix;
 
 	a {
 		color: $grey-medium;
