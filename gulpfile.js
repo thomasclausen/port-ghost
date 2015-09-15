@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
+    sasslint = require('gulp-sass-lint');
     autoprefixer = require('gulp-autoprefixer'),
     csslint = require('gulp-csslint'),
     cssmin = require('gulp-minify-css'),
@@ -43,6 +44,11 @@ gulp.task('styles-test', ['styles'], function() {
     .pipe(csslint('csslintrc.json'))
     .pipe(csslint.reporter());
 });
+gulp.task('styles-test-sass', function() {
+  return gulp.src(pkg.name + '/assets/css/source/*.scss')
+    .pipe(sasslint())
+    .pipe(sasslint.format());
+});
 
 gulp.task('scripts', function() {
   return gulp.src(scripts)
@@ -51,8 +57,8 @@ gulp.task('scripts', function() {
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(pkg.name + '/assets/js'));
 });
-gulp.task('scripts-test', ['scripts'], function() {
-  return gulp.src(pkg.name + '/assets/js/*.js')
+gulp.task('scripts-test', function() {
+  return gulp.src(pkg.name + '/assets/js/source/*.js')
     .pipe(jshint('jshintrc.json'))
     .pipe(jshint.reporter());
 });
