@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     sasslint = require('gulp-sass-lint');
     autoprefixer = require('gulp-autoprefixer'),
+    combine = require('gulp-combine-mq'),
     csslint = require('gulp-csslint'),
     cssmin = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
@@ -35,6 +36,7 @@ gulp.task('styles', function() {
     .pipe(sass({ style: 'compressed' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(concat(pkg.name + '.css'))
+    .pipe(combine())
     .pipe(cssmin({keepSpecialComments: 0}))
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(pkg.name + '/assets/css'));
