@@ -111,5 +111,8 @@
 			}
 		}
 	};
-	shareOptions.querySelector('button').addEventListener('click', shareHighlightedText);
+	var shareButtons = shareOptions.querySelectorAll('button');
+	for (var i = 0; i < shareButtons.length; i++) {
+		shareButtons[i].addEventListener('click', shareHighlightedText);
+	}
 })();
