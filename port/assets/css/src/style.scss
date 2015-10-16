@@ -705,14 +705,16 @@ button {
 	top: 0;
 	z-index: -1;
 	visibility: hidden;
-	transition: margin-top 0.15s, opacity 0.15s, z-index 0s 0.15s, visibility 0s 0.15s;
+	transform: rotate(3deg);
+	transition: margin-top 0.15s, opacity 0.15s, z-index 0s 0.15s, visibility 0s 0.15s, transform 0.15s;
 
 	&.js-show {
 		margin-top: 5px;
 		opacity: 1;
 		z-index: 2;
 		visibility: visible;
-		transition: margin-top 0.15s, opacity 0.25s, z-index 0s, visibility 0s;
+		transform: rotate(0);
+		transition: margin-top 0.15s, opacity 0.25s, z-index 0s, visibility 0s, transform 0.15s;
 	}
 
 	.options {
@@ -720,7 +722,7 @@ button {
 		height: 44px;
 		color: $white;
 		text-align: center;
-		padding: 4px;
+		padding: 4px 2px;
 		background-color: rgba($black,0.9);
 		@include border-radius;
 		margin-left: -62px;
@@ -746,7 +748,11 @@ button {
 			line-height: 36px;
 			padding-top: 0;
 			padding-bottom: 0;
+			margin-right: 2px;
+			margin-left: 2px;
+			float: left;
 			position: static;
+			overflow: hidden;
 
 			&[data-action=twitter] {
 				background-color: #55acee;
