@@ -7,8 +7,7 @@
 
 	var documentState = null,
 		body = document.body,
-		iframes = document.getElementsByTagName('iframe'),
-		iframesLength = iframes.length;
+		iframes = document.getElementsByTagName('iframe');
 
 	function poorMansDebugging(string) {
 		if (window.console) {
@@ -28,7 +27,7 @@
 		}
 	}, 100);
 
-	for (var i = 0; i < iframesLength; i++) {
+	for (var i = 0, iframesLength = iframes.length; i < iframesLength; i++) {
 		var iframe = iframes[i],
 			ratio = '';
 
