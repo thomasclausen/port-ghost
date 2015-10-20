@@ -14,17 +14,18 @@ var gulp = require('gulp'),
     psi = require('psi'),
     pkg = require('./package.json');
 
-var paths = {
-  styles: [
-    pkg.name + '/assets/css/src/*.css',
-    pkg.name + '/assets/css/src/*.scss'
-  ],
-  scripts: pkg.name + '/assets/js/src/*.js',
-  images: pkg.name + '/assets/images/src/*'
-};
+var styles = [
+  pkg.name + '/assets/css/source/vendor/*.css',
+  pkg.name + '/assets/css/source/*.scss'
+],
+scripts = [
+  pkg.name + '/assets/js/source/vendor/*.js',
+  pkg.name + '/assets/js/source/*.js',
+],
+images = pkg.name + '/assets/images/source/*';
 
 gulp.task('styles', function() {
-  return gulp.src(paths.styles)
+  return gulp.src(styles)
     .pipe(sass({ style: 'compressed' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(concat(pkg.name + '.css'))
@@ -39,7 +40,7 @@ gulp.task('styles-test', ['styles'], function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(paths.scripts)
+  return gulp.src(scripts)
     .pipe(concat(pkg.name + '.js', {newLine: ';'}))
     .pipe(jsmin())
     .pipe(rename({suffix: '.min'}))
@@ -52,15 +53,15 @@ gulp.task('scripts-test', ['scripts'], function() {
 });
 
 gulp.task('images', function() {
-  return gulp.src(paths.images)
+  return gulp.src(images)
     .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))
     .pipe(gulp.dest(pkg.name + '/assets/images'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.styles, ['styles']);
-  gulp.watch(paths.scripts, ['scripts']);
-  gulp.watch(paths.images, ['images']);
+  gulp.watch(styles, ['styles']);
+  gulp.watch(scripts, ['scripts']);
+  gulp.watch(images, ['images']);
 });
 
 gulp.task('default', function() {
@@ -72,7 +73,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('zip', function() {
-  return gulp.src('**', { cwd: path.join(process.cwd(), pkg.name)})
+  return gulp.src(['**', '!**/source/**'], { cwd: path.join(process.cwd(), pkg.name)})
     .pipe(zip(pkg.name + '-ghost.zip'))
     .pipe(gulp.dest('.'));
 });
