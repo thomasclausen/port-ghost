@@ -27,7 +27,7 @@
 		}
 	}, 100);
 
-	for (var i = 0, iframesLength = iframes.length; i < iframesLength; i++) {
+	for (var i = 0, il = iframes.length; i < il; i++) {
 		var iframe = iframes[i],
 			ratio = '';
 
