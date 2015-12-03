@@ -15,8 +15,8 @@ Setting up your blog with this theme is done in four easy steps no matter if you
 4. Click on *Upload a New Theme* and select the downloaded zip-file
 
 ### Self-hosting
-1. Download [port-ghost.zip](https://github.com/thomasclausen/port-ghost/blob/master/port-ghost.zip?raw=true) or the folder [**port**](https://github.com/thomasclausen/port-ghost/tree/master/port) from Github
-2. Copy the folder **port** into the Ghost theme directory `ghost/content/themes/`
+1. Download [port-ghost.zip](https://github.com/thomasclausen/port-ghost/blob/master/port-ghost.zip?raw=true) from Github
+2. Unzip and copy the folder **port** into the Ghost theme directory `ghost/content/themes/`
 3. Restart Ghost
 4. Log in to your dashboard and navigate to *Settings > General > Theme*, select **Port** and save
 
@@ -38,14 +38,14 @@ body {
 
 **Custom meta tags**
 ```html
-<meta name="twitter:site" content="@thomasclausendk" />
-<meta name="twitter:creator" content="@thomasclausendk" />
+<meta name="twitter:site" content="@username" />
+<meta name="twitter:creator" content="@username" />
 
-<meta property="article:publisher" content="https://www.facebook.com/thomasclausen.dk" />
-<meta property="article:author" content="https://www.facebook.com/thomasclausen.dk" />
+<meta property="article:publisher" content="https://www.facebook.com/username" />
+<meta property="article:author" content="https://www.facebook.com/username" />
 
-<link rel="publisher" href="https://plus.google.com/+ThomasClausenDK" />
-<link rel="author" href="https://plus.google.com/+ThomasClausenDK" />
+<link rel="publisher" href="https://plus.google.com/+username" />
+<link rel="author" href="https://plus.google.com/+username" />
 ```
 
 **Google Analytics**
