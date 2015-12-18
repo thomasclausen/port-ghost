@@ -310,14 +310,14 @@ button {
 			@extend %reset-list;
 
 			li {
-				margin-left: 18px;
 				display: inline-block;
 
-				&:first-child {
-					margin-left: 0;
-				}
 				&.current a {
 					color: $grey-medium;
+				}
+
+				+ li {
+					margin-left: 18px;
 				}
 			}
 		}
@@ -430,12 +430,8 @@ button {
 			padding-right: 1.5em;
 			padding-left: 1.5em;
 
-			strong {
+			strong + strong {
 				margin-left: 1em;
-
-				&:first-child {
-					margin-left: 0;
-				}
 			}
 		}
 		.footnotes {
@@ -488,7 +484,6 @@ button {
 				height: 8px;
 				background: #999;
 				border-radius: 4px;
-				margin-right: 6px;
 				float: left;
 
 				&.red {
@@ -499,6 +494,10 @@ button {
 				}
 				&.green {
 					background: #2ecc71;
+				}
+
+				+ .button {
+					margin-left: 6px;
 				}
 			}
 		}
