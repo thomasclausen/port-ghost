@@ -16,13 +16,7 @@
 	}
 
 	function init() {
-		if (classie.hasClass(body, 'post-template')) {
-			var wordsPerMinute = 200,
-				postContent = document.querySelector('.post-content').textContent,
-				totalWords = postContent.trim().split(/\s+/g).length;
-
-			document.querySelector('.post-meta .reading-time').innerHTML = Math.ceil(totalWords / wordsPerMinute);
-		}
+		// Do something
 	}
 
 	documentState = setInterval(function () {
