@@ -5,27 +5,7 @@
 (function () {
 	'use strict';
 
-	var documentState = null,
-		body = document.body,
-		iframes = document.getElementsByTagName('iframe');
-
-	function poorMansDebugging(string) {
-		if (window.console) {
-			console.log(string);
-		}
-	}
-
-	function init() {
-		// Do something
-	}
-
-	documentState = setInterval(function () {
-		poorMansDebugging('documentState: ' + document.readyState);
-		if (document.readyState === 'complete') {
-			clearInterval(documentState);
-			init();
-		}
-	}, 100);
+	var iframes = document.getElementsByTagName('iframe');
 
 	for (var i = 0, il = iframes.length; i < il; i++) {
 		var iframe = iframes[i],
