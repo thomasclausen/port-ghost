@@ -475,7 +475,6 @@ button {
 			background: #243638;
 			border-radius: 4px 4px 0 0;
 			margin-top: 0.25em;
-			margin-bottom: -0.25em;
 
 			@extend %clearfix;
 
@@ -499,6 +498,14 @@ button {
 				+ .button {
 					margin-left: 6px;
 				}
+			}
+
+			+ img {
+				margin-top: 0;
+			}
+			+ .embed-responsive {
+				margin-top: 0;
+				margin-bottom: 0.5em;
 			}
 		}
 	}
