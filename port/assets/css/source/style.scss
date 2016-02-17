@@ -9,7 +9,7 @@
 /**
  * Table of Content
 
-	 0.  SASS
+	 0.  Variables
 	 1.  Typography
 	 2.  Form
 	 3.  Header
@@ -19,10 +19,10 @@
  */
 
 /* ==========================================================================
-	 0. SASS
+	 0. Variables
 	 ========================================================================== */
 
-$primary-font-stack: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$primary-font-stack: 'Lato', Arial, sans-serif;
 
 $primary-color: #25292c;
 $secondary-color: #4ac2be;
@@ -47,10 +47,11 @@ $black: #000;
 }
 
 %clearfix {
+
 	&:before,
 	&:after {
-		content: '';
 		display: table;
+		content: '';
 	}
 	&:after {
 		clear: both;
@@ -61,10 +62,13 @@ $black: #000;
 	 1. Typography
 	 ========================================================================== */
 
-*,
-*:before,
-*:after {
+* {
 	box-sizing: border-box;
+
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
 }
 html {
 	font-size: 62.5%;
@@ -102,6 +106,7 @@ h2 {
 }
 h3 {
 	font-size: 1.6rem;
+	line-height: 1.6em;
 }
 h4 {
 	font-size: 1.4em;
@@ -312,7 +317,7 @@ button {
 			li {
 				display: inline-block;
 
-				&.current a {
+				&.nav-current a {
 					color: $grey-medium;
 				}
 
