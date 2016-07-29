@@ -366,6 +366,60 @@ button {
 			padding-bottom: 6em;
 		}
 	}
+
+	.page-template-har-lavet & {
+
+		hr {
+			clear: both;
+		}
+		h3 {
+			line-height: 1.6em;
+
+			@media all and (min-width: 30em) {
+				width: calc(100% / 3);
+				line-height: 1.6em;
+				float: left;
+			}
+			@media all and (min-width: 40em) {
+				width: calc(100% / 3);
+				line-height: 1.6em;
+				float: left;
+			}
+		}
+		h3 + p {
+			margin-top: 1em; margin-bottom: 1.5em;
+
+			@media all and (min-width: 30em) {
+				width: calc(100% / 3 * 2);
+				margin-top: 0;
+				margin-bottom: 1.5em;
+				float: left;
+			}
+		}
+		h3 + ul {
+			list-style: none;
+			padding-left: 0;
+			margin-bottom: 1.5em;
+
+			@media all and (min-width: 30em) {
+				width: calc(100% / 3 * 2);
+				list-style: none;
+				padding-left: 0;
+				margin-top: 0;
+				margin-bottom: 1.5em;
+				float: left;
+			}
+			@media all and (min-width: 40em) {
+				column-count: 2;
+				column-gap: 1em;
+			}
+		}
+		.year-range {
+			width: 4em;
+			margin-right: 1em;
+			display: inline-block;
+		}
+	}
 }
 
 .post {
@@ -435,7 +489,7 @@ button {
 			padding-right: 1.5em;
 			padding-left: 1.5em;
 
-			strong + strong {
+			strong ~ strong {
 				margin-left: 1em;
 			}
 		}
